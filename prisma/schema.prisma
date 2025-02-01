@@ -34,6 +34,17 @@ enum EvtolState {
   RETURNING
 }
 
+enum Regions {
+  Rumuola
+  Rumuigbo
+  Rumuokwuta
+  Rumuokoro
+  Rumudara
+  Rumubiakani
+  Rumuodumaya
+  Rumuogba
+}
+
 model Load {
   id            Int         @id @unique @default(autoincrement())
   item          Medications @relation(fields: [medicationsId], references: [id])
@@ -51,7 +62,7 @@ model User {
   age           Int
   email         String   @unique
   phoneNumber   String
-  region        String
+  region        Regions
   password      String
   role          role     @default(USER)
   emailVerified Boolean  @default(false)

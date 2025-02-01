@@ -15,9 +15,11 @@ export class UserController {
     public createUser = async (req: Request, res: Response, next: NextFunction): Promise<void>=>{
         try {
             const data = req.body as CreatUserDTO;
-            await this.userServices.createUser(data);
-        } catch (error) {
+            const user = await this.userServices.createUser(data);
+            res.status(201).json(user);
             
+        } catch (error) {
+            next(error);
         }
     }
 
