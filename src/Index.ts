@@ -1,6 +1,8 @@
 import express from "express"
 import cors from "cors"
 import dotenv from "dotenv"
+import userRouter from "./routes/user.route";
+import evtolRouter from "./routes/evtol.route";
 
 
 dotenv.config();
@@ -31,7 +33,9 @@ app.use(cors(corsOptions));
 
 app.use(express.json());
 
-// app.use('evtol/api/v1/users', )
+app.use('/api/v1/users', userRouter);
+
+app.use('/api/v1/evtol', evtolRouter);
 
 
 

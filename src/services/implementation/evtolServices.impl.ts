@@ -34,6 +34,11 @@ export class EvtolServicesImpl implements EvtolServices {
         }else{
             await db.load.deleteMany({
                 where: {evtolId: id}
+            })
+            .then(async ()=> {
+                await db.load.createMany({
+                    data
+                })
             });
         }
     }
