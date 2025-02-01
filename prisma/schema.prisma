@@ -13,29 +13,25 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-
 enum role {
   USER
   ADMIN
 }
 
-
-model user {
-  id  Int   @id @default(autoincrement()) @unique
-  googleId String?
-  firstName   String 
-  lastName    String
-  age   Int
-  email   String  @unique
+model User {
+  id            Int      @id @unique @default(autoincrement())
+  googleId      String?
+  firstName     String
+  lastName      String
+  age           Int
+  email         String   @unique
   phoneNumber   String
-  region    String
-  password    String
-  role  role  @default(USER)
-  emailVerified Boolean @default(false)
-  otp String?
-  otpExpiry String?
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
+  region        String
+  password      String
+  role          role     @default(USER)
+  emailVerified Boolean  @default(false)
+  otp           String?
+  otpExpiry     String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
 }
-
-
