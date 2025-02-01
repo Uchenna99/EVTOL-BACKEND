@@ -34,6 +34,15 @@ enum EvtolState {
   RETURNING
 }
 
+model Load {
+  id            Int         @id @unique @default(autoincrement())
+  item          Medications @relation(fields: [medicationsId], references: [id])
+  quantity      Int
+  medicationsId Int
+  Evtol         Evtol?      @relation(fields: [evtolId], references: [id])
+  evtolId       Int?
+}
+
 model User {
   id            Int      @id @unique @default(autoincrement())
   googleId      String?
@@ -53,20 +62,19 @@ model User {
 }
 
 model Evtol {
-  id              Int           @id @unique @default(autoincrement())
-  serialNumber    String        @unique
+  id              Int        @id @unique @default(autoincrement())
+  serialNumber    String     @unique
   model           EvtolModel
-  batteryCapacity Int
-  state           EvtolState    @default(IDLE)
-  loadedItems     Medications[]
+  batteryCapacity Int        @default(100)
+  state           EvtolState @default(IDLE)
+  loadedItems     Load[]
 }
 
 model Medications {
-  id       Int     @id @unique @default(autoincrement())
-  name     String
-  weight   String
-  code     String  @unique
-  image    String
-  quantity Int
-  evtol    Evtol[]
+  id     Int    @id @unique @default(autoincrement())
+  name   String
+  weight String
+  code   String @unique
+  image  String
+  Load   Load[]
 }

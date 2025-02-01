@@ -1,5 +1,5 @@
-import { EvtolModel, EvtolState, Medications } from "@prisma/client";
-import { IsNotEmpty, IsNumber, IsOptional, IsString, IsUppercase, Length } from "class-validator";
+import { EvtolModel, EvtolState } from "@prisma/client";
+import { IsNotEmpty, IsNumber, IsString, IsUppercase, Length } from "class-validator";
 
 
 export class CreateEvtolDTO {
@@ -10,11 +10,4 @@ export class CreateEvtolDTO {
 
     @IsNotEmpty()
     model!: EvtolModel
-
-    @IsOptional()
-    loadedItems!: Medications[];
-
-    @IsNotEmpty()
-    @IsNumber()
-    batteryCapacity!: number;
 }

@@ -1,11 +1,12 @@
-import { Evtol, Medications } from "@prisma/client";
+import { Evtol, Load, Medications } from "@prisma/client";
 import { CreateEvtolDTO } from "../../dto/CreateEvtol.dto";
 import { EvtolServices } from "../evtolServices";
 import { db } from "../../config/db";
+import { CreateLoadDTO } from "../../dto/CreateLoad.dto";
 
 
 export class EvtolServicesImpl implements EvtolServices {
-
+    
     async createEvtol(data: CreateEvtolDTO): Promise<Evtol> {
         const findEvtol = await db.evtol.findUnique({
             where: {serialNumber: data.serialNumber}
@@ -17,31 +18,22 @@ export class EvtolServicesImpl implements EvtolServices {
                 data: {
                     serialNumber: data.serialNumber,
                     model: data.model,
-                    batteryCapacity: data.batteryCapacity
                 }
             });
             return newEvtol;
         }
     }
-
-
-    async loadEvtol(id: number, data: Medications[]): Promise<void> {
+    
+    
+    async loadEvtol(id: number, data: CreateLoadDTO[]): Promise<void> {
         const findEvtol = await db.evtol.findUnique({
             where: {id}
         });
         if(!findEvtol){
-            throw new Error(`Could not find the specified evtol`);
+            throw new Error(`Error finding evtol with id: ${id}`);
         }else{
-            await db.evtol.update({
-                where: {id},
-                data: {
-                    loadedItems: {
-                        connectOrCreate: data.map(medication => ({
-                            where: {id: medication.id},
-                            create: {...medication}
-                        }))
-                    }
-                }
+            await db.load.deleteMany({
+                where: {evtolId: id}
             });
         }
     }
