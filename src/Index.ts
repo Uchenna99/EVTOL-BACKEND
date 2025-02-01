@@ -31,7 +31,7 @@ app.use(cors(corsOptions));
 
 app.use(express.json());
 
-app.use('evtol/api/v1/users', )
+// app.use('evtol/api/v1/users', )
 
 
 
