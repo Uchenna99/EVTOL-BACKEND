@@ -29,12 +29,30 @@ export class UserServicesImpl implements UserServices{
 
 
     async getUserById(id: number): Promise<User> {
-        throw new Error("Method not implemented.");
+        const findUser = await db.user.findFirst({
+            where: {id}
+        });
+        if(!findUser){
+            throw new Error(`User with id: ${id} not found`);
+        }else{
+            return findUser;
+        }
     }
 
 
     async updateUser(id: number, data: Partial<CreatUserDTO>): Promise<User> {
-        throw new Error("Method not implemented.");
+        const findUser = await db.user.findUnique({
+            where: {id}
+        });
+        if(!findUser){
+            throw new Error(`User with id: ${id} not found`);
+        }else{
+            const updatedUser = await db.user.update({
+                where: {id},
+                data
+            });
+            return updatedUser;
+        }
     }
     
 }

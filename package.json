@@ -20,6 +20,8 @@
   },
   "dependencies": {
     "@prisma/client": "^6.3.0",
+    "@react-email/components": "^0.0.32",
+    "@types/nodemailer": "^6.4.17",
     "bcryptjs": "^2.4.3",
     "class-validator": "^0.14.1",
     "cors": "^2.8.5",
@@ -27,7 +29,9 @@
     "express": "^4.21.2",
     "express-validator": "^7.2.1",
     "jsonwebtoken": "^9.0.2",
+    "nodemailer": "^6.10.0",
     "nodemon": "^3.1.9",
-    "prisma": "^6.3.0"
+    "prisma": "^6.3.0",
+    "react-email": "^3.0.6"
   }
 }
