@@ -1,0 +1,40 @@
+import { User } from "@prisma/client";
+import { CreatUserDTO } from "../../dto/CreatUser.dto";
+import { UserServices } from "../userServices";
+import { db } from "../../config/db";
+
+
+export class UserServicesImpl implements UserServices{
+
+    async createUser(data: CreatUserDTO): Promise<void> {
+        const findUser = await db.user.findUnique({
+            where: {email: data.email}
+        });
+        if(findUser){
+            throw new Error('Sorry, this email has already been used')
+        }else{
+            const newUser = await db.user.create({
+                data: {
+                    firstName: data.firstName,
+                    lastName: data.lastName,
+                    age: data.age,
+                    phoneNumber: data.phoneNumber,
+                    region: data.region,
+                    email: data.email,
+                    password: data.password
+                }
+            })
+        }
+    }
+
+
+    async getUserById(id: number): Promise<User> {
+        throw new Error("Method not implemented.");
+    }
+
+
+    async updateUser(id: number, data: Partial<CreatUserDTO>): Promise<User> {
+        throw new Error("Method not implemented.");
+    }
+    
+}
