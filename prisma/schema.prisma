@@ -67,7 +67,7 @@ model User {
   role          role     @default(USER)
   emailVerified Boolean  @default(false)
   otp           String?
-  otpExpiry     String?
+  otpExpiry     DateTime?
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
 }

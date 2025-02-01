@@ -37,6 +37,8 @@ app.use('/api/v1/users', userRouter);
 
 app.use('/api/v1/evtol', evtolRouter);
 
+app.use('/api/v1/auth', )
+
 
 
 app.listen(PORT, ()=>{

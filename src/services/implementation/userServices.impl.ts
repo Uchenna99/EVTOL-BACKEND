@@ -3,6 +3,8 @@ import { CreatUserDTO } from "../../dto/CreatUser.dto";
 import { UserServices } from "../userServices";
 import { db } from "../../config/db";
 import { hashPassword } from "../../utils/password.utils";
+import { sendOtpEmail } from "../../otp/email";
+import { generateOtp } from "../../utils/otp.utils";
 
 
 export class UserServicesImpl implements UserServices{
@@ -14,6 +16,7 @@ export class UserServicesImpl implements UserServices{
         if(findUser){
             throw new Error('Sorry, this email has already been used')
         }else{
+            const otp = generateOtp();
             const newUser = await db.user.create({
                 data: {
                     firstName: data.firstName,
@@ -25,6 +28,20 @@ export class UserServicesImpl implements UserServices{
                     password: await hashPassword(data.password)
                 }
             });
+            await sendOtpEmail({
+                to: data.email,
+                subject: "Verify your email",
+                otp: otp,
+            })
+            .then(async ()=>{
+                await db.user.update({
+                    where: {email: data.email},
+                    data: {
+                        otp: await hashPassword(otp),
+                        otpExpiry: this.generateOtpExpiration()
+                    }
+                })
+            })
             return newUser;
         }
     }
@@ -62,6 +79,11 @@ export class UserServicesImpl implements UserServices{
         await db.user.delete({
             where: {id}
         });
+    }
+
+
+    generateOtpExpiration() {
+        return new Date(Date.now() + 10 * 60 * 1000);
     }
     
 }
