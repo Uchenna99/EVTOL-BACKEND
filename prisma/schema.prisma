@@ -13,13 +13,10 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-
-
 enum role {
   USER
   ADMIN
 }
-
 
 enum EvtolModel {
   Lightweight
@@ -27,7 +24,6 @@ enum EvtolModel {
   Cruiserweight
   Heavyweight
 }
-
 
 enum EvtolState {
   IDLE
@@ -37,7 +33,6 @@ enum EvtolState {
   DELIVERED
   RETURNING
 }
-
 
 model User {
   id            Int      @id @unique @default(autoincrement())
@@ -57,11 +52,20 @@ model User {
   updatedAt     DateTime @updatedAt
 }
 
-
 model Evtol {
-  id  Int @id @unique @default(autoincrement())
-  serialNumber  String
-  model EvtolModel
-  batteryCapacity String
-  state EvtolState 
+  id              Int           @id @unique @default(autoincrement())
+  serialNumber    String
+  model           EvtolModel
+  batteryCapacity Int
+  state           EvtolState    @default(IDLE)
+  loadedItems     Medications[]
+}
+
+model Medications {
+  id     Int     @id @unique @default(autoincrement())
+  name   String
+  weight String
+  code   String  @unique
+  image  String
+  evtol  Evtol[]
 }

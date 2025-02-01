@@ -5,7 +5,7 @@ import { db } from "../../config/db";
 
 
 export class UserServicesImpl implements UserServices{
-
+    
     async createUser(data: CreatUserDTO): Promise<void> {
         const findUser = await db.user.findUnique({
             where: {email: data.email}
@@ -27,7 +27,7 @@ export class UserServicesImpl implements UserServices{
         }
     }
 
-
+    
     async getUserById(id: number): Promise<User> {
         const findUser = await db.user.findFirst({
             where: {id}
@@ -53,6 +53,13 @@ export class UserServicesImpl implements UserServices{
             });
             return updatedUser;
         }
+    }
+
+
+    async deleteUser(id: number): Promise<void> {
+        await db.user.delete({
+            where: {id}
+        });
     }
     
 }
