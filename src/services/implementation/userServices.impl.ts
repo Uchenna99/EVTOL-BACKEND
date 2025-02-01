@@ -2,6 +2,7 @@ import { User } from "@prisma/client";
 import { CreatUserDTO } from "../../dto/CreatUser.dto";
 import { UserServices } from "../userServices";
 import { db } from "../../config/db";
+import { hashPassword } from "../../utils/password.utils";
 
 
 export class UserServicesImpl implements UserServices{
@@ -21,7 +22,7 @@ export class UserServicesImpl implements UserServices{
                     phoneNumber: data.phoneNumber,
                     region: data.region,
                     email: data.email,
-                    password: data.password
+                    password: await hashPassword(data.password)
                 }
             });
             return newUser;
