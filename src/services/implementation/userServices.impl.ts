@@ -6,7 +6,7 @@ import { db } from "../../config/db";
 
 export class UserServicesImpl implements UserServices{
     
-    async createUser(data: CreatUserDTO): Promise<void> {
+    async createUser(data: CreatUserDTO): Promise<User> {
         const findUser = await db.user.findUnique({
             where: {email: data.email}
         });
@@ -23,7 +23,8 @@ export class UserServicesImpl implements UserServices{
                     email: data.email,
                     password: data.password
                 }
-            })
+            });
+            return newUser;
         }
     }
 

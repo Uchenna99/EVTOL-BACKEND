@@ -54,7 +54,7 @@ model User {
 
 model Evtol {
   id              Int           @id @unique @default(autoincrement())
-  serialNumber    String
+  serialNumber    String        @unique
   model           EvtolModel
   batteryCapacity Int
   state           EvtolState    @default(IDLE)
@@ -62,10 +62,11 @@ model Evtol {
 }
 
 model Medications {
-  id     Int     @id @unique @default(autoincrement())
-  name   String
-  weight String
-  code   String  @unique
-  image  String
-  evtol  Evtol[]
+  id       Int     @id @unique @default(autoincrement())
+  name     String
+  weight   String
+  code     String  @unique
+  image    String
+  quantity Int
+  evtol    Evtol[]
 }
