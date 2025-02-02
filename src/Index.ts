@@ -3,6 +3,7 @@ import cors from "cors"
 import dotenv from "dotenv"
 import userRouter from "./routes/user.route";
 import evtolRouter from "./routes/evtol.route";
+import authRouter from "./routes/auth.route";
 
 
 dotenv.config();
@@ -37,7 +38,7 @@ app.use('/api/v1/users', userRouter);
 
 app.use('/api/v1/evtol', evtolRouter);
 
-app.use('/api/v1/auth', )
+app.use('/api/v1/auth', authRouter);
 
 
 

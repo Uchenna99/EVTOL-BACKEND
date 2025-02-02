@@ -44,13 +44,22 @@ export class EvtolServicesImpl implements EvtolServices {
     }
 
 
-    checkLoadedItems(id: number): Promise<void> {
-        throw new Error("Method not implemented.");
+    async getEvtolById(id: number): Promise<Evtol> {
+        const findEvtol = await db.evtol.findUnique({
+            where: {id}
+        });
+        if(!findEvtol){
+            throw new Error(`Evtol with id: ${id} not found`);
+        }
+        return findEvtol;
     }
 
 
-    checkAvailableEvtol(): Promise<Evtol[]> {
-        throw new Error("Method not implemented.");
+    async getEvtolLoad(id: number): Promise<Load[]> {
+        const findLoad = await db.load.findMany({
+            where: {evtolId: id}
+        });
+        return findLoad;
     }
 
 

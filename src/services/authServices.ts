@@ -5,5 +5,5 @@ import { VerifyEmailDTO } from "../dto/VerifyEmail.dto";
 
 export interface AuthServices {
     login(data: LoginDTO): Promise<{accessToken: string}>;
-    verifyEmail(data: VerifyEmailDTO): Promise<User>
+    verifyEmail(data: VerifyEmailDTO): Promise<void>
 }

@@ -35,4 +35,28 @@ export class EvtolController {
         }
     }
 
+
+    public getEvtol = async (req: Request, res: Response, next: NextFunction): Promise<void>=>{
+        try {
+            const id = parseInt(req.params.id)
+            const evtol = await this.evtolServices.getEvtolById(id);
+            res.status(200).json(evtol);
+
+        } catch (error) {
+            next(error);
+        }
+    }
+
+
+    public getLoad = async (req: Request, res: Response, next: NextFunction): Promise<void>=>{
+        try {
+            const id = parseInt(req.params.id);
+            const evtolLoad = this.evtolServices.getEvtolLoad(id);
+            res.status(200).json(evtolLoad);
+
+        } catch (error) {
+            next(error);
+        }
+    }
+
 }
