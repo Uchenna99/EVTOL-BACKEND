@@ -1,4 +1,4 @@
-import { Evtol, Load, Medications } from "@prisma/client";
+import { Evtol, Load, Medications, User } from "@prisma/client";
 import { CreateEvtolDTO } from "../../dto/CreateEvtol.dto";
 import { EvtolServices } from "../evtolServices";
 import { db } from "../../config/db";
@@ -25,15 +25,15 @@ export class EvtolServicesImpl implements EvtolServices {
     }
     
     
-    async loadEvtol(id: number, data: CreateLoadDTO[]): Promise<void> {
+    async loadEvtol( data: CreateLoadDTO[]): Promise<void> {
         const findEvtol = await db.evtol.findUnique({
-            where: {id}
+            where: {id: data[0].evtolId}
         });
         if(!findEvtol){
-            throw new Error(`Error finding evtol with id: ${id}`);
+            throw new Error(`Error finding evtol with id: ${data[0].evtolId}`);
         }else{
             await db.load.deleteMany({
-                where: {evtolId: id}
+                where: {evtolId: findEvtol.id}
             })
             .then(async ()=> {
                 await db.load.createMany({
@@ -56,9 +56,7 @@ export class EvtolServicesImpl implements EvtolServices {
 
 
     async getEvtolLoad(id: number): Promise<Load[]> {
-        const findLoad = await db.load.findMany({
-            where: {evtolId: id}
-        });
+        const findLoad = await db.load.findMany({});
         return findLoad;
     }
 

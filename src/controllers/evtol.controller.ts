@@ -25,10 +25,10 @@ export class EvtolController {
 
     public loadEvtol = async (req: Request, res: Response, next: NextFunction): Promise<void>=> {
         try {
-            const id = parseInt(req.params.id);
+            // const id = parseInt(req.params.id);
             const data = req.body as CreateLoadDTO[];
-            const load = await this.evtolServices.loadEvtol(id, data);
-            res.status(201).json(load);
+            await this.evtolServices.loadEvtol(data);
+            res.status(201).json({message: 'Evtol loaded successfully'});
 
         } catch (error) {
             next(error);
@@ -48,12 +48,12 @@ export class EvtolController {
     }
 
 
-    public getLoad = async (req: Request, res: Response, next: NextFunction): Promise<void>=>{
+    public getLoad = async (req: Request, res: Response, next: NextFunction)=>{
         try {
             const id = parseInt(req.params.id);
-            const evtolLoad = this.evtolServices.getEvtolLoad(id);
-            res.status(200).json(evtolLoad);
-
+            const load = await this.evtolServices.getEvtolLoad(id);
+            res.status(200).json(load);
+            
         } catch (error) {
             next(error);
         }
