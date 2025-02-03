@@ -56,13 +56,10 @@ export class EvtolServicesImpl implements EvtolServices {
 
 
     async getEvtolLoad(id: number): Promise<Load[]> {
-        const findLoad = await db.load.findMany({});
+        const findLoad = await db.load.findMany({
+            where: {evtolId: id}
+        });
         return findLoad;
-    }
-
-
-    batteryCheck(id: number): Promise<number> {
-        throw new Error("Method not implemented.");
     }
 
 }

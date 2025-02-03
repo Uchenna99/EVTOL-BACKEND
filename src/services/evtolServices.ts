@@ -8,5 +8,4 @@ export interface EvtolServices {
     loadEvtol(data: CreateLoadDTO[]): Promise<void>;
     getEvtolById(id: number): Promise<Evtol>;
     getEvtolLoad(id: number): Promise<Load[]>;
-    batteryCheck(id: number): Promise<number>
 }

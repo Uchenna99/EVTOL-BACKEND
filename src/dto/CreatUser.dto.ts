@@ -18,7 +18,7 @@ export class CreatUserDTO {
 
     @IsNumber()
     @IsNotEmpty()
-    age!: number;
+    age!: string;
 
     @IsNotEmpty()
     @IsString()

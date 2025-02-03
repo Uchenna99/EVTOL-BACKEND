@@ -68,7 +68,7 @@ model User {
   googleId      String?
   firstName     String
   lastName      String
-  age           Int
+  age           String
   email         String    @unique
   phoneNumber   String
   region        Regions
