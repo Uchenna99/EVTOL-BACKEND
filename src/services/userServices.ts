@@ -1,5 +1,6 @@
-import { User } from "@prisma/client";
+import { Load, Order, User } from "@prisma/client";
 import { CreatUserDTO } from "../dto/CreatUser.dto";
+import { CreateOrderDTO } from "../dto/createOrder.dto";
 
 
 export interface UserServices {
@@ -7,4 +8,5 @@ export interface UserServices {
     getUserById(id: number): Promise<User>;
     updateUser(id: number, data: Partial<CreatUserDTO>): Promise<User>;
     deleteUser(id: number): Promise<void>;
+    createOrder(data: CreateOrderDTO): Promise<Order>;
 }

@@ -10,4 +10,7 @@ export class CreateEvtolDTO {
 
     @IsNotEmpty()
     model!: EvtolModel
+
+    @IsNotEmpty()
+    image!: string;
 }

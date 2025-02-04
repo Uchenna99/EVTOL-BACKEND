@@ -18,6 +18,7 @@ export class EvtolServicesImpl implements EvtolServices {
                 data: {
                     serialNumber: data.serialNumber,
                     model: data.model,
+                    image: data.image
                 }
             });
             return newEvtol;
@@ -25,22 +26,10 @@ export class EvtolServicesImpl implements EvtolServices {
     }
     
     
-    async loadEvtol( data: CreateLoadDTO[]): Promise<void> {
-        const findEvtol = await db.evtol.findUnique({
-            where: {id: data[0].evtolId}
+    async createLoad( data: CreateLoadDTO[]): Promise<void> {
+        await db.load.createMany({
+            data
         });
-        if(!findEvtol){
-            throw new Error(`Error finding evtol with id: ${data[0].evtolId}`);
-        }else{
-            await db.load.deleteMany({
-                where: {evtolId: findEvtol.id}
-            })
-            .then(async ()=> {
-                await db.load.createMany({
-                    data
-                })
-            });
-        }
     }
 
 

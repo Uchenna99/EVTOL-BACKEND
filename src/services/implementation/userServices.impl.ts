@@ -1,10 +1,11 @@
-import { User } from "@prisma/client";
+import { Load, Order, User } from "@prisma/client";
 import { CreatUserDTO } from "../../dto/CreatUser.dto";
 import { UserServices } from "../userServices";
 import { db } from "../../config/db";
 import { hashPassword } from "../../utils/password.utils";
 import { sendOtpEmail } from "../../otp/email";
 import { generateOtp } from "../../utils/otp.utils";
+import { CreateOrderDTO } from "../../dto/createOrder.dto";
 
 
 export class UserServicesImpl implements UserServices{
@@ -57,7 +58,7 @@ export class UserServicesImpl implements UserServices{
             return findUser;
         }
     }
-
+    
 
     async updateUser(id: number, data: Partial<CreatUserDTO>): Promise<User> {
         const findUser = await db.user.findUnique({
@@ -82,6 +83,14 @@ export class UserServicesImpl implements UserServices{
     }
 
 
+    async createOrder(data: CreateOrderDTO): Promise<Order> {
+        const newOrder = await db.order.create({
+            data
+        });
+        return newOrder;
+    }
+    
+    
     generateOtpExpiration() {
         return new Date(Date.now() + 10 * 60 * 1000);
     }

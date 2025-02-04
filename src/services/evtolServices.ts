@@ -5,7 +5,7 @@ import { CreateLoadDTO } from "../dto/CreateLoad.dto";
 
 export interface EvtolServices {
     createEvtol(data: CreateEvtolDTO): Promise<Evtol>;
-    loadEvtol(data: CreateLoadDTO[]): Promise<void>;
+    createLoad(data: CreateLoadDTO[]): Promise<void>;
     getEvtolById(id: number): Promise<Evtol>;
     getEvtolLoad(id: number): Promise<Load[]>;
 }
