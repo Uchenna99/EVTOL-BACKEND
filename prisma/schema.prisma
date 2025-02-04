@@ -46,21 +46,28 @@ enum Regions {
 }
 
 model Load {
-  id            Int         @id @unique @default(autoincrement())
+  id            String      @id @unique @default(cuid())
   item          Medications @relation(fields: [medicationsId], references: [id])
-  quantity      Int
   medicationsId Int
-  Evtol         Evtol?      @relation(fields: [evtolId], references: [id])
-  evtolId       Int
+  quantity      Int
+  Orders        Order?      @relation(fields: [ordersId], references: [id])
+  ordersId      String?
+}
+
+model Order {
+  id        String   @id @unique @default(cuid())
+  loads     Load[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Evtol {
   id              Int        @id @unique @default(autoincrement())
   serialNumber    String     @unique
   model           EvtolModel
+  image           String
   batteryCapacity Int        @default(100)
   state           EvtolState @default(IDLE)
-  Load            Load[]
 }
 
 model User {
@@ -71,6 +78,7 @@ model User {
   age           String
   email         String    @unique
   phoneNumber   String
+  image         String?
   region        Regions
   password      String
   role          role      @default(USER)
@@ -87,5 +95,6 @@ model Medications {
   weight String
   code   String @unique
   image  String
+  price  Int
   Load   Load[]
 }
