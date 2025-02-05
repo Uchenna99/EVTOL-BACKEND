@@ -35,4 +35,15 @@ export class UserController {
         }
     }
 
+
+    public getMeds = async (req: Request, res: Response, next: NextFunction)=>{
+        try {
+            const allMeds = await this.userServices.getAllMeds();
+            res.status(200).json(allMeds);
+
+        } catch (error) {
+            next(error);
+        }
+    }
+
 }

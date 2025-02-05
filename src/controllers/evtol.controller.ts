@@ -27,7 +27,7 @@ export class EvtolController {
         try {
             // const id = parseInt(req.params.id);
             const data = req.body as CreateLoadDTO[];
-            await this.evtolServices.loadEvtol(data);
+            await this.evtolServices.createLoad(data);
             res.status(201).json({message: 'Evtol loaded successfully'});
 
         } catch (error) {

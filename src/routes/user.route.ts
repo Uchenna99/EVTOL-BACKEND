@@ -9,6 +9,8 @@ userRouter.post('/create-user', userController.createUser);
 
 userRouter.get('/get-user/:id', userController.getUser);
 
+userRouter.get('/fetch-meds', userController.getMeds);
+
 
 
 export default userRouter;

@@ -1,4 +1,4 @@
-import { Load, Order, User } from "@prisma/client";
+import { Load, Medications, Order, User } from "@prisma/client";
 import { CreatUserDTO } from "../../dto/CreatUser.dto";
 import { UserServices } from "../userServices";
 import { db } from "../../config/db";
@@ -46,7 +46,7 @@ export class UserServicesImpl implements UserServices{
             return newUser;
         }
     }
-
+    
     
     async getUserById(id: number): Promise<User> {
         const findUser = await db.user.findFirst({
@@ -59,7 +59,7 @@ export class UserServicesImpl implements UserServices{
         }
     }
     
-
+    
     async updateUser(id: number, data: Partial<CreatUserDTO>): Promise<User> {
         const findUser = await db.user.findUnique({
             where: {id}
@@ -74,20 +74,26 @@ export class UserServicesImpl implements UserServices{
             return updatedUser;
         }
     }
-
-
+    
+    
     async deleteUser(id: number): Promise<void> {
         await db.user.delete({
             where: {id}
         });
     }
-
-
+    
+    
     async createOrder(data: CreateOrderDTO): Promise<Order> {
         const newOrder = await db.order.create({
             data
         });
         return newOrder;
+    }
+
+
+    async getAllMeds(): Promise<Medications[]> {
+        const allMeds = await db.medications.findMany({});
+        return allMeds;
     }
     
     
