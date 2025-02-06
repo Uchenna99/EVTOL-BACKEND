@@ -1,4 +1,4 @@
-import { Load, Medications, Order, User } from "@prisma/client";
+import { Medications, Order, User } from "@prisma/client";
 import { CreatUserDTO } from "../dto/CreatUser.dto";
 import { CreateOrderDTO } from "../dto/createOrder.dto";
 

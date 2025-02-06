@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import { UserServicesImpl } from "../services/implementation/userServices.impl";
 import { CreatUserDTO } from "../dto/CreatUser.dto";
+import { CreateOrderDTO } from "../dto/createOrder.dto";
 
 
 
@@ -41,6 +42,17 @@ export class UserController {
             const allMeds = await this.userServices.getAllMeds();
             res.status(200).json(allMeds);
 
+        } catch (error) {
+            next(error);
+        }
+    }
+
+
+    public createOrder = async (req: Request, res: Response, next: NextFunction)=>{
+        try {
+            const data = req.body as CreateOrderDTO;
+            const newOrder = await this.userServices.createOrder(data);
+            res.status(201).json(newOrder);
         } catch (error) {
             next(error);
         }
