@@ -1,0 +1,109 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum role {
+  USER
+  ADMIN
+}
+
+enum EvtolModel {
+  Lightweight
+  Middleweight
+  Cruiserweight
+  Heavyweight
+}
+
+enum EvtolState {
+  IDLE
+  LOADING
+  LOADED
+  DELIVERING
+  DELIVERED
+  RETURNING
+}
+
+enum Regions {
+  Rumuola
+  Rumuigbo
+  Rumuokwuta
+  Rumuokoro
+  Rumudara
+  Rumubiakani
+  Rumuodumaya
+  Rumuogba
+}
+
+model Load {
+  id            String      @id @unique @default(cuid())
+  item          Medications @relation(fields: [medicationsId], references: [id])
+  medicationsId Int
+  quantity      Int
+  Order         Order?      @relation(fields: [orderId], references: [id])
+  orderId       String?
+  evtol         Evtol       @relation(fields: [evtolId], references: [id])
+  evtolId       Int
+}
+
+model Order {
+  id        String   @id @unique @default(cuid())
+  loads     Load[]
+  evtol     Evtol    @relation(fields: [evtolId], references: [id])
+  evtolId   Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Evtol {
+  id              Int        @id @unique @default(autoincrement())
+  serialNumber    String     @unique
+  model           EvtolModel
+  image           String
+  batteryCapacity Int        @default(100)
+  state           EvtolState @default(IDLE)
+  Order           Order[]
+  Load            Load[]
+}
+
+model User {
+  id            Int       @id @unique @default(autoincrement())
+  googleId      String?
+  firstName     String
+  lastName      String
+  age           String
+  email         String    @unique
+  phoneNumber   String
+  image         String?
+  region        Regions
+  password      String
+  role          role      @default(USER)
+  emailVerified Boolean   @default(false)
+  otp           String?
+  otpExpiry     DateTime?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+model Medications {
+  id     Int    @id @unique @default(autoincrement())
+  name   String
+  weight String
+  code   String @unique
+  image  String
+  price  Int
+  Load   Load[]
+}
+
+
+DATABASE_URL="postgresql://postgres:FederalGovt.@localhost:5432/Evtol?schema=public"
