@@ -59,4 +59,15 @@ export class EvtolController {
         }
     }
 
+
+    public getAllEvtols = async (req: Request, res: Response, next: NextFunction)=>{
+        try {
+            const allEvtols = await this.evtolServices.getAllEvtols();
+            res.status(200).json(allEvtols);
+            
+        } catch (error) {
+            next(error);
+        }
+    }
+
 }

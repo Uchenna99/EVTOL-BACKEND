@@ -14,6 +14,8 @@ evtolRouter.get('/fetch-evtol/:id', evtolController.getEvtol);
 
 evtolRouter.get('/evtol-load/:id', evtolController.getLoad);
 
+evtolRouter.get('/fetch-all-evtols', evtolController.getAllEvtols);
+
 
 
 export default evtolRouter;

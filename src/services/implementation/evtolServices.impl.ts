@@ -1,4 +1,4 @@
-import { Evtol, Load, Medications, User } from "@prisma/client";
+import { Evtol, Load, Medications, Order, User } from "@prisma/client";
 import { CreateEvtolDTO } from "../../dto/CreateEvtol.dto";
 import { EvtolServices } from "../evtolServices";
 import { db } from "../../config/db";
@@ -44,11 +44,18 @@ export class EvtolServicesImpl implements EvtolServices {
     }
 
 
-    async getEvtolLoad(id: number): Promise<Load[]> {
-        const findLoad = await db.load.findMany({
-            where: {evtolId: id}
+    async getEvtolLoad(evtolId: number): Promise<Order|null> {
+        const findOrder = await db.order.findFirst({
+            where: {evtolId},
+            orderBy: {createdAt: 'desc'}
         });
-        return findLoad;
+        return findOrder;
+    }
+
+
+    async getAllEvtols(): Promise<Evtol[]> {
+        const allEvtols = await db.evtol.findMany({});
+        return allEvtols;
     }
 
 }
