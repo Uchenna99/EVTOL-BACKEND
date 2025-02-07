@@ -12,7 +12,7 @@ evtolRouter.post('/create-load/', evtolController.loadEvtol);
 
 evtolRouter.get('/fetch-evtol/:id', evtolController.getEvtol);
 
-evtolRouter.get('/evtol-load/:id', evtolController.getLoad);
+evtolRouter.get('/evtol-load', evtolController.getLoad);
 
 evtolRouter.get('/fetch-all-evtols', evtolController.getAllEvtols);
 
