@@ -61,6 +61,7 @@ model Order {
   loads     Load[]
   evtol     Evtol    @relation(fields: [evtolId], references: [id])
   evtolId   Int
+  userId    String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
