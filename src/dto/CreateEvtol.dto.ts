@@ -13,4 +13,7 @@ export class CreateEvtolDTO {
 
     @IsNotEmpty()
     image!: string;
+
+    @IsNotEmpty()
+    maxWeight!: number;
 }

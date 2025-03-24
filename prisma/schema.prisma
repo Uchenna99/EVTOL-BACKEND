@@ -52,8 +52,8 @@ model Load {
   quantity      Int
   Order         Order?      @relation(fields: [orderId], references: [id])
   orderId       String?
-  evtol         Evtol       @relation(fields: [evtolId], references: [id])
-  evtolId       Int
+  evtol         Evtol?      @relation(fields: [evtolId], references: [id])
+  evtolId       Int?
 }
 
 model Order {
@@ -70,6 +70,7 @@ model Evtol {
   id              Int        @id @unique @default(autoincrement())
   serialNumber    String     @unique
   model           EvtolModel
+  maxWeight       Int
   image           String
   batteryCapacity Int        @default(100)
   state           EvtolState @default(IDLE)

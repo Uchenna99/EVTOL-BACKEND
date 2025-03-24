@@ -4,6 +4,7 @@ import { EvtolServices } from "../evtolServices";
 import { db } from "../../config/db";
 import { CreateLoadDTO } from "../../dto/CreateLoad.dto";
 import { GetLoadDTO } from "../../dto/GetLoad.dto";
+import { getAvailableEvtolsDTO } from "../../dto/GetEvtol.dto";
 
 
 export class EvtolServicesImpl implements EvtolServices {
@@ -18,6 +19,7 @@ export class EvtolServicesImpl implements EvtolServices {
             const newEvtol = await db.evtol.create({
                 data: {
                     serialNumber: data.serialNumber,
+                    maxWeight: data.maxWeight,
                     model: data.model,
                     image: data.image
                 }
@@ -32,8 +34,8 @@ export class EvtolServicesImpl implements EvtolServices {
             data
         });
     }
-
-
+    
+    
     async getEvtolById(id: number): Promise<Evtol> {
         const findEvtol = await db.evtol.findUnique({
             where: {id}
@@ -43,8 +45,8 @@ export class EvtolServicesImpl implements EvtolServices {
         }
         return findEvtol;
     }
-
-
+    
+    
     async getEvtolLoad(data: GetLoadDTO): Promise<Load[]> {
         const findOrder = await db.load.findMany({
             where: {
@@ -54,11 +56,22 @@ export class EvtolServicesImpl implements EvtolServices {
         })
         return findOrder;
     }
-
-
+    
+    
     async getAllEvtols(): Promise<Evtol[]> {
         const allEvtols = await db.evtol.findMany({});
         return allEvtols;
     }
 
+
+    async getAvailableEvtols(data: getAvailableEvtolsDTO): Promise<Evtol[]> {
+        return await db.evtol.findMany({
+            where: {
+                batteryCapacity: {gt: 25},
+                maxWeight: {gte: data.weight}
+            }
+        })
+        
+    }
+    
 }
