@@ -97,7 +97,7 @@ model User {
 model Medications {
   id     Int    @id @unique @default(autoincrement())
   name   String
-  weight String
+  weight Int
   code   String @unique
   image  String
   price  Int

@@ -5,7 +5,7 @@ import { CreateOrderDTO } from "../dto/createOrder.dto";
 
 export interface UserServices {
     createUser(data: CreatUserDTO): Promise<User>;
-    getUserById(id: string): Promise<User>;
+    getUserById(id: string): Promise<Partial<User>>;
     updateUser(id: string, data: Partial<CreatUserDTO>): Promise<User>;
     deleteUser(id: string): Promise<void>;
     createOrder(userId: string): Promise<Order>;

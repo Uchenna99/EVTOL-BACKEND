@@ -48,9 +48,10 @@ export class UserServicesImpl implements UserServices{
     }
     
     
-    async getUserById(id: string): Promise<User> {
+    async getUserById(id: string): Promise<Partial<User>> {
         const findUser = await db.user.findFirst({
-            where: {id}
+            where: {id},
+            omit: {password:true, otp: true, otpExpiry: true, createdAt: true, updatedAt: true}
         });
         if(!findUser){
             throw new Error(`User with id: ${id} not found`);
