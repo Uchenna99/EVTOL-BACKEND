@@ -5,9 +5,9 @@ import { CreateOrderDTO } from "../dto/createOrder.dto";
 
 export interface UserServices {
     createUser(data: CreatUserDTO): Promise<User>;
-    getUserById(id: number): Promise<User>;
-    updateUser(id: number, data: Partial<CreatUserDTO>): Promise<User>;
-    deleteUser(id: number): Promise<void>;
+    getUserById(id: string): Promise<User>;
+    updateUser(id: string, data: Partial<CreatUserDTO>): Promise<User>;
+    deleteUser(id: string): Promise<void>;
     createOrder(userId: string): Promise<Order>;
     getAllMeds(): Promise<Medications[]>;
 }

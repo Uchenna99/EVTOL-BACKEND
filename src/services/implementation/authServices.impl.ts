@@ -63,7 +63,7 @@ export class AuthServicesImpl implements AuthServices {
     }
 
 
-    generateAccessToken( userId: number, name: string, role: string ): string {
+    generateAccessToken( userId: string, name: string, role: string ): string {
         return jwt.sign({id: userId, name: name, role: role}, process.env.JWT_SECRET || ''
         )
     };

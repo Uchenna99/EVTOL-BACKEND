@@ -48,7 +48,7 @@ export class UserServicesImpl implements UserServices{
     }
     
     
-    async getUserById(id: number): Promise<User> {
+    async getUserById(id: string): Promise<User> {
         const findUser = await db.user.findFirst({
             where: {id}
         });
@@ -60,7 +60,7 @@ export class UserServicesImpl implements UserServices{
     }
     
     
-    async updateUser(id: number, data: Partial<CreatUserDTO>): Promise<User> {
+    async updateUser(id: string, data: Partial<CreatUserDTO>): Promise<User> {
         const findUser = await db.user.findUnique({
             where: {id}
         });
@@ -76,7 +76,7 @@ export class UserServicesImpl implements UserServices{
     }
     
     
-    async deleteUser(id: number): Promise<void> {
+    async deleteUser(id: string): Promise<void> {
         await db.user.delete({
             where: {id}
         });

@@ -76,7 +76,7 @@ model Evtol {
 }
 
 model User {
-  id            Int       @id @unique @default(autoincrement())
+  id            String    @id @unique @default(cuid())
   googleId      String?
   firstName     String
   lastName      String
