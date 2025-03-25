@@ -8,6 +8,6 @@ export interface UserServices {
     getUserById(id: number): Promise<User>;
     updateUser(id: number, data: Partial<CreatUserDTO>): Promise<User>;
     deleteUser(id: number): Promise<void>;
-    createOrder(data: CreateOrderDTO): Promise<Order>;
+    createOrder(userId: string): Promise<Order>;
     getAllMeds(): Promise<Medications[]>;
 }

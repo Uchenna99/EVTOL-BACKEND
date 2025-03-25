@@ -52,15 +52,13 @@ model Load {
   quantity      Int
   Order         Order?      @relation(fields: [orderId], references: [id])
   orderId       String?
-  evtol         Evtol?      @relation(fields: [evtolId], references: [id])
-  evtolId       Int?
 }
 
 model Order {
   id        String   @id @unique @default(cuid())
   loads     Load[]
-  evtol     Evtol    @relation(fields: [evtolId], references: [id])
-  evtolId   Int
+  evtol     Evtol?   @relation(fields: [evtolId], references: [id])
+  evtolId   Int?
   userId    String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -75,7 +73,6 @@ model Evtol {
   batteryCapacity Int        @default(100)
   state           EvtolState @default(IDLE)
   Order           Order[]
-  Load            Load[]
 }
 
 model User {

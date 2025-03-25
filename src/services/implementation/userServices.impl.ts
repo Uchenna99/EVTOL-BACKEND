@@ -83,9 +83,9 @@ export class UserServicesImpl implements UserServices{
     }
     
     
-    async createOrder(data: CreateOrderDTO): Promise<Order> {
+    async createOrder(userId: string): Promise<Order> {
         const newOrder = await db.order.create({
-            data
+            data: {userId}
         });
         return newOrder;
     }

@@ -2,7 +2,6 @@ import { NextFunction, Request, Response } from "express";
 import { EvtolServicesImpl } from "../services/implementation/evtolServices.impl";
 import { CreateEvtolDTO } from "../dto/CreateEvtol.dto";
 import { CreateLoadDTO } from "../dto/CreateLoad.dto";
-import { GetLoadDTO } from "../dto/GetLoad.dto";
 
 
 export class EvtolController {
@@ -51,7 +50,7 @@ export class EvtolController {
 
     public getLoad = async (req: Request, res: Response, next: NextFunction)=>{
         try {
-            const data = req.body as GetLoadDTO;
+            const data = req.body as string;
             const load = await this.evtolServices.getEvtolLoad(data);
             res.status(200).json(load);
             

@@ -3,7 +3,6 @@ import { CreateEvtolDTO } from "../../dto/CreateEvtol.dto";
 import { EvtolServices } from "../evtolServices";
 import { db } from "../../config/db";
 import { CreateLoadDTO } from "../../dto/CreateLoad.dto";
-import { GetLoadDTO } from "../../dto/GetLoad.dto";
 import { getAvailableEvtolsDTO } from "../../dto/GetEvtol.dto";
 
 
@@ -47,12 +46,9 @@ export class EvtolServicesImpl implements EvtolServices {
     }
     
     
-    async getEvtolLoad(data: GetLoadDTO): Promise<Load[]> {
+    async getEvtolLoad(orderId: string): Promise<Load[]> {
         const findOrder = await db.load.findMany({
-            where: {
-                evtolId: data.evtolId,
-                orderId: data.orderId
-            }
+            where: { orderId }
         })
         return findOrder;
     }

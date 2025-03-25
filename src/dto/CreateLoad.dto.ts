@@ -10,10 +10,6 @@ export class CreateLoadDTO {
     quantity!: number;
 
     @IsNotEmpty()
-    @IsNumber()
-    evtolId!: number;
-
-    @IsNotEmpty()
     @IsString()
     orderId!: string;
 }

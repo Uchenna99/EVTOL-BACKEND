@@ -6,9 +6,5 @@ export class CreateOrderDTO {
 
     @IsNotEmpty()
     @IsNumber()
-    evtolId!: number;
-
-    @IsNotEmpty()
-    @IsNumber()
     userId!: string;
 }
