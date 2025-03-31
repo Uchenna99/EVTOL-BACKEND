@@ -1,5 +1,4 @@
-import { Load } from "@prisma/client";
-import { IsArray, IsNotEmpty, IsNumber } from "class-validator";
+import { IsNotEmpty, IsNumber } from "class-validator";
 
 
 export class CreateOrderDTO {

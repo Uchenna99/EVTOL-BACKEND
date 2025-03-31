@@ -50,9 +50,10 @@ export class UserController {
 
     public createOrder = async (req: Request, res: Response, next: NextFunction)=>{
         try {
-            const data = req.body as string;
+            const data = req.body as CreateOrderDTO;
             const newOrder = await this.userServices.createOrder(data);
             res.status(201).json(newOrder);
+            
         } catch (error) {
             next(error);
         }
