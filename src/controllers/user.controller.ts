@@ -59,4 +59,16 @@ export class UserController {
         }
     }
 
+
+    public getUserOrders = async (req: Request, res: Response, next: NextFunction)=>{
+        try {
+            const id = req.params.id
+            const orders = await this.userServices.getUserOrders(id);
+            res.status(200).json(orders);
+
+        } catch (error) {
+            next(error);
+        }
+    };
+
 }

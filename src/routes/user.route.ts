@@ -13,6 +13,8 @@ userRouter.get('/fetch-meds', userController.getMeds);
 
 userRouter.post('/create-order', userController.createOrder);
 
+userRouter.get('/get-orders', userController.getUserOrders);
+
 
 
 export default userRouter;

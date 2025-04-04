@@ -90,11 +90,19 @@ export class UserServicesImpl implements UserServices{
         });
         return newOrder;
     }
-
-
+    
+    
     async getAllMeds(): Promise<Medications[]> {
         const allMeds = await db.medications.findMany({});
         return allMeds;
+    }
+
+
+    async getUserOrders(id: string): Promise<Order[]> {
+        const orders = await db.order.findMany({
+            where: {id}
+        });
+        return orders;
     }
     
     

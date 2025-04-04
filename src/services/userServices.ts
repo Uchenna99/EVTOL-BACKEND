@@ -9,5 +9,6 @@ export interface UserServices {
     updateUser(id: string, data: Partial<CreatUserDTO>): Promise<User>;
     deleteUser(id: string): Promise<void>;
     createOrder(data: CreateOrderDTO): Promise<Order>;
+    getUserOrders(id: string): Promise<Order[]>;
     getAllMeds(): Promise<Medications[]>;
 }
