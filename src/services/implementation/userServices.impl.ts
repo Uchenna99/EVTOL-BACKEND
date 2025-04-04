@@ -100,7 +100,8 @@ export class UserServicesImpl implements UserServices{
 
     async getUserOrders(id: string): Promise<Order[]> {
         const orders = await db.order.findMany({
-            where: {id}
+            where: {id},
+            include: {loads: true}
         });
         return orders;
     }
