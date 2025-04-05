@@ -45,6 +45,12 @@ enum Regions {
   Rumuogba
 }
 
+enum Status {
+  PENDING
+  COMPLETED
+  CANCELLED
+}
+
 model Load {
   id            String      @id @unique @default(cuid())
   item          Medications @relation(fields: [medicationsId], references: [id])
@@ -60,6 +66,7 @@ model Order {
   evtol     Evtol?   @relation(fields: [evtolId], references: [id])
   evtolId   Int?
   userId    String
+  status    Status   @default(PENDING)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
