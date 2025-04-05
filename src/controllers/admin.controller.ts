@@ -10,7 +10,12 @@ export class AdminController {
     }
 
     public getAllOrders = async (req: Request, res: Response, next: NextFunction)=>{
-        const orders = await this.adminServices.getAllOrders();
-        res.status(200).json(orders)
+        try {
+            const orders = await this.adminServices.getAllOrders();
+            res.status(200).json(orders)
+            
+        } catch (error) {
+            next(error);
+        }
     };
 }
