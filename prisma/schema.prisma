@@ -79,6 +79,7 @@ model Order {
   evtol     Evtol?   @relation(fields: [evtolId], references: [id])
   evtolId   Int?
   userId    String
+  reference String   @unique
   status    Status   @default(PENDING)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

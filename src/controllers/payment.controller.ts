@@ -1,8 +1,10 @@
 import axios from 'axios';
 import { Request, Response } from 'express';
-const secretKey = "sk_test_837fb861720009a8f9d6be73b09b678d720235e2"
+import dotenv from "dotenv"
+dotenv.config();
 
-export const initializeTransaction = async (req:Request, res:Response) => {
+
+export const initializeTransaction = async (req: Request, res: Response) => {
   try {
     const { email, amount } = req.body;
 
@@ -15,7 +17,7 @@ export const initializeTransaction = async (req:Request, res:Response) => {
       },
       {
         headers: {
-          Authorization: `Bearer ${secretKey}`,
+          Authorization: `Bearer ${process.env.PAYSTACK_SECRET_KEY}`,
           'Content-Type': 'application/json',
         },
       }
