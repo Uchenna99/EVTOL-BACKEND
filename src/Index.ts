@@ -6,6 +6,7 @@ import evtolRouter from "./routes/evtol.route";
 import authRouter from "./routes/auth.route";
 import { db } from "./config/db";
 import { log } from "console";
+import adminRouter from "./routes/admin.route";
 
 
 
@@ -43,7 +44,7 @@ app.use('/api/v1/evtol', evtolRouter);
 
 app.use('/api/v1/auth', authRouter);
 
-app.use('/api/v1/admin', authRouter);
+app.use('/api/v1/admin', adminRouter);
 
 
 

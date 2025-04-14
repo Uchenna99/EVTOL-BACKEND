@@ -51,6 +51,19 @@ enum Status {
   CANCELLED
 }
 
+enum Groups {
+  Cardiovascular
+  Neurological_Psychiatric
+  Allergy_Respiratory
+  Musculoskeletal_Pain
+  Infectious_Disease
+  Gastrointestinal
+  Endocrine_Metabolic
+  Reproductive_Urological
+  Dermatological
+  General_Use
+}
+
 model Load {
   id            String      @id @unique @default(cuid())
   item          Medications @relation(fields: [medicationsId], references: [id])
@@ -108,5 +121,6 @@ model Medications {
   code   String @unique
   image  String
   price  Int
+  group  Groups @default(General_Use)
   Load   Load[]
 }
