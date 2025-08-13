@@ -24,7 +24,7 @@ export class AuthServicesImpl implements AuthServices {
                 throw new Error('Invalid email or password');
             }else{
                 const username = `${findUser.firstName} ${findUser.lastName}`
-                const accessToken = this.generateAccessToken(findUser.id, username, findUser. role);
+                const accessToken = this.generateAccessToken(findUser.id, username, findUser.role);
                 return {accessToken};
             }
         }
