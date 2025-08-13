@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "Order" ALTER COLUMN "reference" DROP NOT NULL,
+ALTER COLUMN "reference" DROP DEFAULT;
