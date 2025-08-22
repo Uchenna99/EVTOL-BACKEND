@@ -1,4 +1,4 @@
-import express from "express"
+import express, { Request, Response } from "express"
 import cors from "cors"
 import dotenv from "dotenv"
 import userRouter from "./routes/user.route";
@@ -38,6 +38,10 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 app.use(express.json());
+
+app.get("/", (req: Request, res: Response) => {
+  res.send("Welcome to the backend server");
+});
 
 app.use('/api/v1/users', userRouter);
 
