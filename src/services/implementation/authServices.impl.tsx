@@ -1,3 +1,4 @@
+import React from "react";
 import { User } from "@prisma/client";
 import { LoginDTO } from "../../dto/Login.dto";
 import { VerifyEmailDTO } from "../../dto/VerifyEmail.dto";
@@ -6,8 +7,12 @@ import { db } from "../../config/db";
 import jwt from "jsonwebtoken"
 import dotenv from "dotenv"
 import { comparePassword } from "../../utils/password.utils";
+import { EmailResponse, WelcomeEmail } from "../../EmailService";
+import EmailService from "../../EmailService/EmailService";
 
 dotenv.config();
+
+const emailService = new EmailService();
 
 
 export class AuthServicesImpl implements AuthServices {
@@ -31,7 +36,7 @@ export class AuthServicesImpl implements AuthServices {
     }
 
 
-    async verifyEmail(data: VerifyEmailDTO): Promise<void> {
+    async verifyEmail(data: VerifyEmailDTO): Promise<EmailResponse | void> {
         const findUser = await db.user.findUnique({
             where: {email: data.email}
         });
@@ -52,6 +57,7 @@ export class AuthServicesImpl implements AuthServices {
         if(otpExpired){
             throw new Error('OTP is expired');
         }
+        
         const updateUser = await db.user.update({
             where: {email:data.email},
             data: {
@@ -60,6 +66,11 @@ export class AuthServicesImpl implements AuthServices {
                 otpExpiry: null
             }
         });
+
+        const template = <WelcomeEmail name={findUser.firstName + " " + findUser.lastName} />;
+        const response: EmailResponse = await emailService.sendEmail(findUser.email, "Welcome!", template);
+
+        if(!response.success){ return response }
     }
 
 

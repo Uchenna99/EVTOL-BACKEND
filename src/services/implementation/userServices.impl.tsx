@@ -7,7 +7,7 @@ import { sendOtpEmail } from "../../otp/email";
 import { generateOtp } from "../../utils/otp.utils";
 import { CreateOrderDTO } from "../../dto/createOrder.dto";
 import { error } from "console";
-import { EmailResponse, WelcomeEmail } from "../../EmailService";
+import { EmailResponse, OtpEmail, WelcomeEmail } from "../../EmailService";
 import EmailService from "../../EmailService/EmailService";
 import React from "react";
 
@@ -52,8 +52,8 @@ export class UserServicesImpl implements UserServices{
             // })
             // .catch((error)=> {throw new Error(error)})
 
-            const template = <WelcomeEmail name={data.firstName} />;
-            const response: EmailResponse = await emailService.sendEmail(data.email, "subject", template);
+            const template = <OtpEmail otp={otp} />;
+            const response: EmailResponse = await emailService.sendEmail(data.email, "Verify your email", template);
 
             if (response.success) {
                 return newUser;

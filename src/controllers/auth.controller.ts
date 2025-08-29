@@ -28,8 +28,8 @@ export class AuthController {
     public verifyEmail = async (req: Request, res: Response, next: NextFunction): Promise<void>=>{
         try {
             const data = req.body as VerifyEmailDTO;
-            await this.authServices.verifyEmail(data)
-            .then(()=>{ res.status(200).json({message: 'Email verified successfully'}) });
+            const response = await this.authServices.verifyEmail(data)
+            .then(()=>{ res.status(200).json({response, message: 'Email verified successfully'}) });
 
         } catch (error) {
             next(error);
