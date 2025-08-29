@@ -56,6 +56,13 @@ export class UserServicesImpl implements UserServices{
             const response: EmailResponse = await emailService.sendEmail(data.email, "Verify your email", template);
 
             if (response.success) {
+                await db.user.update({
+                    where: {email: data.email},
+                    data: {
+                        otp: await hashPassword(otp),
+                        otpExpiry: this.generateOtpExpiration()
+                    }
+                })
                 return newUser;
             } else {
                 return response;
