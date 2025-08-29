@@ -7,11 +7,16 @@ import { sendOtpEmail } from "../../otp/email";
 import { generateOtp } from "../../utils/otp.utils";
 import { CreateOrderDTO } from "../../dto/createOrder.dto";
 import { error } from "console";
+import { EmailResponse, WelcomeEmail } from "../../EmailService";
+import EmailService from "../../EmailService/EmailService";
+import React from "react";
 
+
+const emailService = new EmailService();
 
 export class UserServicesImpl implements UserServices{
     
-    async createUser(data: CreatUserDTO): Promise<User> {
+    async createUser(data: CreatUserDTO): Promise<User | EmailResponse> {
         const findUser = await db.user.findUnique({
             where: {email: data.email}
         });
@@ -30,23 +35,33 @@ export class UserServicesImpl implements UserServices{
                     password: await hashPassword(data.password)
                 }
             });
-            await sendOtpEmail({
-                to: data.email,
-                subject: "Verify your email",
-                otp: otp,
-            })
-            .then(async ()=>{
-                await db.user.update({
-                    where: {email: data.email},
-                    data: {
-                        otp: await hashPassword(otp),
-                        otpExpiry: this.generateOtpExpiration()
-                    }
-                })
-            })
-            .catch((error)=> {throw new Error(error)})
-            
-            return newUser;
+
+            // await sendOtpEmail({
+            //     to: data.email,
+            //     subject: "Verify your email",
+            //     otp: otp,
+            // })
+            // .then(async ()=>{
+            //     await db.user.update({
+            //         where: {email: data.email},
+            //         data: {
+            //             otp: await hashPassword(otp),
+            //             otpExpiry: this.generateOtpExpiration()
+            //         }
+            //     })
+            // })
+            // .catch((error)=> {throw new Error(error)})
+
+            const template = <WelcomeEmail name={data.firstName} />;
+            const response: EmailResponse = await emailService.sendEmail(data.email, "subject", template);
+
+            if (response.success) {
+                return newUser;
+            } else {
+                return response;
+            }
+
+            // return newUser;
         }
     }
     
