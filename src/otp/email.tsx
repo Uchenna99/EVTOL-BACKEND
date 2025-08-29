@@ -33,12 +33,17 @@ const transporter = nodemailer.createTransport({
 
 export async function sendOtpEmail({ to, subject, otp }: SendEmailOptions) {
   const emailHtml = await render(<OtpEmail otp={otp} />);
-  await transporter.sendMail({
-    from: `EVTOL <${process.env.SMTP_USER}>`,
-    to,
-    subject,
-    html: emailHtml,
-  });
+  try {
+      await transporter.sendMail({
+        from: `EVTOL <${process.env.SMTP_USER}>`,
+        to,
+        subject,
+        html: emailHtml,
+      });
+    } catch (error: any) {
+      console.error('Email sending failed:', error);
+      throw new Error("Sending verification email failed");
+    }
 }
 
 export async function welcomeEmail({ to, subject, name }: WelcomeEmailOptions) {

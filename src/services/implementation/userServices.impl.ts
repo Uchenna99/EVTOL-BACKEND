@@ -6,6 +6,7 @@ import { hashPassword } from "../../utils/password.utils";
 import { sendOtpEmail } from "../../otp/email";
 import { generateOtp } from "../../utils/otp.utils";
 import { CreateOrderDTO } from "../../dto/createOrder.dto";
+import { error } from "console";
 
 
 export class UserServicesImpl implements UserServices{
@@ -43,6 +44,8 @@ export class UserServicesImpl implements UserServices{
                     }
                 })
             })
+            .catch((error)=> {throw new Error(error)})
+            
             return newUser;
         }
     }
