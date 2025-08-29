@@ -58,7 +58,7 @@ export class AuthServicesImpl implements AuthServices {
             throw new Error('OTP is expired');
         }
         
-        const updateUser = await db.user.update({
+        await db.user.update({
             where: {email:data.email},
             data: {
                 emailVerified: true,

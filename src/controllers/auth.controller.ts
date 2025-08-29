@@ -29,7 +29,7 @@ export class AuthController {
         try {
             const data = req.body as VerifyEmailDTO;
             const response = await this.authServices.verifyEmail(data)
-            .then(()=>{ res.status(200).json({response, message: 'Email verified successfully'}) });
+            res.status(200).json({response, message: 'Email verified successfully'});
 
         } catch (error) {
             next(error);
