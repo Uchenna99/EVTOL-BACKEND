@@ -19,7 +19,6 @@ export class AuthController {
             res.status(200).json(token);
             
         } catch (error) {
-            console.error("Login error:", error);
             next(error);
         }
     }
