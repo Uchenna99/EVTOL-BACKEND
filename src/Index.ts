@@ -8,6 +8,7 @@ import { db } from "./config/db";
 import { log } from "console";
 import adminRouter from "./routes/admin.route";
 import paymentRouter from "./routes/payment.route";
+import portfolioRouter from "./routes/portfolio.route";
 
 
 
@@ -52,6 +53,8 @@ app.use('/api/v1/auth', authRouter);
 app.use('/api/v1/admin', adminRouter);
 
 app.use('/api/v1/payment', paymentRouter);
+
+app.use('/api/v1/email', portfolioRouter);
 
 
 

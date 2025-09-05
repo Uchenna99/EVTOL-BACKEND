@@ -5,6 +5,8 @@ export { WelcomeEmail } from './WelcomeEmail';
 
 export { OtpEmail } from './OtpEmail';
 
+export { PortfolioEmail } from './PortfolioEmail';
+
 
 export type EmailResponse = {
   success: boolean;
