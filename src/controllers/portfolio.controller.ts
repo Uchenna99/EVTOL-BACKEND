@@ -15,7 +15,7 @@ export class PortfolioController {
         try {
             const data = req.body as sendMessageDTO;
             const result = await this.portfolioServices.sendMessage(data);
-            res.status(200).json(result)
+            res.status(200).json(result);
             
         } catch (error) {
             next(error);

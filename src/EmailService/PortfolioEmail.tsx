@@ -6,9 +6,10 @@ dotenv.config();
 interface WelcomeEmailProps {
   name: string;
   message: string;
+  email?: string;
 }
 
-export const PortfolioEmail = ({ name, message }: WelcomeEmailProps) => {
+export const PortfolioEmail = ({ name, message, email }: WelcomeEmailProps) => {
   return (
     
    <Html>
@@ -40,6 +41,17 @@ export const PortfolioEmail = ({ name, message }: WelcomeEmailProps) => {
          >
            Message from {name}
          </Heading>
+
+         <Text
+           style={{
+             fontSize: "16px",
+             lineHeight: "1.5",
+             color: "#333",
+             marginBottom: "20px",
+           }}
+         >
+           {email}
+         </Text>
 
          <Text
            style={{

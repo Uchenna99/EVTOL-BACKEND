@@ -9,4 +9,6 @@ export class sendMessageDTO {
     @IsNotEmpty()
     @IsString()
     message!: string;
+
+    email!: string;
 }
