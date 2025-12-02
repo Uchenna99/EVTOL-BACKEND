@@ -40,8 +40,8 @@ app.use(cors(corsOptions));
 
 app.use(express.json());
 
-app.get("/", (req: Request, res: Response) => {
-  res.send("Welcome to the backend server");
+app.get("/", (req, res) => {
+  res.send("Evtol Server is running 🚀");
 });
 
 app.use('/api/v1/users', userRouter);
