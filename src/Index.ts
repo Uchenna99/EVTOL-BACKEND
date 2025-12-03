@@ -4,8 +4,6 @@ import dotenv from "dotenv"
 import userRouter from "./routes/user.route";
 import evtolRouter from "./routes/evtol.route";
 import authRouter from "./routes/auth.route";
-import { db } from "./config/db";
-import { log } from "console";
 import adminRouter from "./routes/admin.route";
 import paymentRouter from "./routes/payment.route";
 import portfolioRouter from "./routes/portfolio.route";
