@@ -13,5 +13,13 @@ class CreateOrderDTO {
 exports.CreateOrderDTO = CreateOrderDTO;
 __decorate([
     (0, class_validator_1.IsNotEmpty)(),
-    (0, class_validator_1.IsNumber)()
+    (0, class_validator_1.IsString)()
 ], CreateOrderDTO.prototype, "userId", void 0);
+__decorate([
+    (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.IsNumber)()
+], CreateOrderDTO.prototype, "evtolId", void 0);
+__decorate([
+    (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.IsString)()
+], CreateOrderDTO.prototype, "reference", void 0);

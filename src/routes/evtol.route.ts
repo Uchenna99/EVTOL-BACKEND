@@ -8,11 +8,7 @@ const evtolRouter = express.Router();
 
 evtolRouter.post('/create-evtol', evtolController.createEvtol);
 
-evtolRouter.post('/create-load', evtolController.loadEvtol);
-
 evtolRouter.get('/fetch-evtol/:id', evtolController.getEvtol);
-
-evtolRouter.post('/evtol-load', evtolController.getLoad);
 
 evtolRouter.get('/fetch-all-evtols', evtolController.getAllEvtols);
 

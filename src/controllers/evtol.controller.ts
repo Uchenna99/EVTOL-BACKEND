@@ -1,7 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import { EvtolServicesImpl } from "../services/implementation/evtolServices.impl";
 import { CreateEvtolDTO } from "../dto/CreateEvtol.dto";
-import { CreateLoadDTO } from "../dto/CreateLoad.dto";
 
 
 export class EvtolController {
@@ -23,37 +22,12 @@ export class EvtolController {
     }
 
 
-    public loadEvtol = async (req: Request, res: Response, next: NextFunction): Promise<void>=> {
-        try {
-            // const id = parseInt(req.params.id);
-            const data = req.body as CreateLoadDTO[];
-            await this.evtolServices.createLoad(data);
-            res.status(201).json({message: 'Order created successfully'});
-
-        } catch (error) {
-            next(error);
-        }
-    }
-
-
     public getEvtol = async (req: Request, res: Response, next: NextFunction): Promise<void>=>{
         try {
             const id = parseInt(req.params.id)
             const evtol = await this.evtolServices.getEvtolById(id);
             res.status(200).json(evtol);
 
-        } catch (error) {
-            next(error);
-        }
-    }
-
-
-    public getLoad = async (req: Request, res: Response, next: NextFunction)=>{
-        try {
-            const data = req.body as string;
-            const load = await this.evtolServices.getEvtolLoad(data);
-            res.status(200).json(load);
-            
         } catch (error) {
             next(error);
         }

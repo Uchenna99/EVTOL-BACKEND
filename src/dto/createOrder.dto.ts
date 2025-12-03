@@ -1,9 +1,18 @@
-import { IsNotEmpty, IsNumber } from "class-validator";
+import { IsNotEmpty, IsNumber, IsString } from "class-validator";
 
 
 export class CreateOrderDTO {
 
     @IsNotEmpty()
-    @IsNumber()
+    @IsString()
     userId!: string;
+
+    @IsNotEmpty()
+    @IsNumber()
+    evtolId!: number;
+
+    @IsNotEmpty()
+    @IsString()
+    reference!: string;
+
 }

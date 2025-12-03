@@ -7,10 +7,8 @@ exports.UserServicesImpl = void 0;
 const db_1 = require("../../config/db");
 const password_utils_1 = require("../../utils/password.utils");
 const otp_utils_1 = require("../../utils/otp.utils");
-const EmailService_1 = require("../../EmailService");
-const EmailService_2 = __importDefault(require("../../EmailService/EmailService"));
-const react_1 = __importDefault(require("react"));
-const emailService = new EmailService_2.default();
+const EmailService_1 = __importDefault(require("../../EmailService/EmailService"));
+const emailService = new EmailService_1.default();
 class UserServicesImpl {
     async createUser(data) {
         const findUser = await db_1.db.user.findUnique({
@@ -27,7 +25,6 @@ class UserServicesImpl {
                     lastName: data.lastName,
                     age: data.age,
                     phoneNumber: data.phoneNumber,
-                    region: data.region,
                     email: data.email,
                     password: await (0, password_utils_1.hashPassword)(data.password)
                 }
@@ -47,22 +44,21 @@ class UserServicesImpl {
             //     })
             // })
             // .catch((error)=> {throw new Error(error)})
-            const template = react_1.default.createElement(EmailService_1.OtpEmail, { otp: otp });
-            const response = await emailService.sendEmail(data.email, "Verify your email", template);
-            if (response.success) {
-                await db_1.db.user.update({
-                    where: { email: data.email },
-                    data: {
-                        otp: await (0, password_utils_1.hashPassword)(otp),
-                        otpExpiry: this.generateOtpExpiration()
-                    }
-                });
-                return newUser;
-            }
-            else {
-                return response;
-            }
-            // return newUser;
+            // const template = <OtpEmail otp={otp} />;
+            // const response: EmailResponse = await emailService.sendEmail(data.email, "Verify your email", template);
+            // if (response.success) {
+            //     await db.user.update({
+            //         where: {email: data.email},
+            //         data: {
+            //             otp: await hashPassword(otp),
+            //             otpExpiry: this.generateOtpExpiration()
+            //         }
+            //     })
+            //     return newUser;
+            // } else {
+            //     return response;
+            // }
+            return newUser;
         }
     }
     async getUserById(id) {
@@ -98,19 +94,19 @@ class UserServicesImpl {
         });
     }
     async createOrder(data) {
-        const newOrder = await db_1.db.order.create({
+        const newOrder = await db_1.db.deliveryOrder.create({
             data
         });
         return newOrder;
     }
     async getAllMeds() {
-        const allMeds = await db_1.db.medications.findMany({});
+        const allMeds = await db_1.db.medicalSupply.findMany({});
         return allMeds;
     }
     async getUserOrders(id) {
-        const orders = await db_1.db.order.findMany({
+        const orders = await db_1.db.deliveryOrder.findMany({
             where: { userId: id },
-            include: { loads: true }
+            include: { OrderItem: true }
         });
         return orders;
     }

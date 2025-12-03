@@ -25,13 +25,8 @@ __decorate([
     (0, class_validator_1.Length)(11, 14)
 ], CreatUserDTO.prototype, "phoneNumber", void 0);
 __decorate([
-    (0, class_validator_1.IsNumber)(),
     (0, class_validator_1.IsNotEmpty)()
 ], CreatUserDTO.prototype, "age", void 0);
-__decorate([
-    (0, class_validator_1.IsNotEmpty)(),
-    (0, class_validator_1.IsString)()
-], CreatUserDTO.prototype, "region", void 0);
 __decorate([
     (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.IsString)(),

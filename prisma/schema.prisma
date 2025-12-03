@@ -69,7 +69,6 @@ model User {
   email         String    @unique
   phoneNumber   String
   image         String?
-  region        Regions
   password      String
   role          role      @default(USER)
   emailVerified Boolean   @default(false)

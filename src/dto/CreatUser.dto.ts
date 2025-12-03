@@ -16,13 +16,8 @@ export class CreatUserDTO {
     @Length(11, 14)
     phoneNumber!: string;
 
-    @IsNumber()
     @IsNotEmpty()
     age!: string;
-
-    @IsNotEmpty()
-    @IsString()
-    region!: Regions;
 
     @IsNotEmpty()
     @IsString()

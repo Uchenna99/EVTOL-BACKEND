@@ -14,32 +14,11 @@ class EvtolController {
                 next(error);
             }
         };
-        this.loadEvtol = async (req, res, next) => {
-            try {
-                // const id = parseInt(req.params.id);
-                const data = req.body;
-                await this.evtolServices.createLoad(data);
-                res.status(201).json({ message: 'Order created successfully' });
-            }
-            catch (error) {
-                next(error);
-            }
-        };
         this.getEvtol = async (req, res, next) => {
             try {
                 const id = parseInt(req.params.id);
                 const evtol = await this.evtolServices.getEvtolById(id);
                 res.status(200).json(evtol);
-            }
-            catch (error) {
-                next(error);
-            }
-        };
-        this.getLoad = async (req, res, next) => {
-            try {
-                const data = req.body;
-                const load = await this.evtolServices.getEvtolLoad(data);
-                res.status(200).json(load);
             }
             catch (error) {
                 next(error);

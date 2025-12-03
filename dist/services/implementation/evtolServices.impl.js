@@ -22,11 +22,6 @@ class EvtolServicesImpl {
             return newEvtol;
         }
     }
-    async createLoad(data) {
-        await db_1.db.load.createMany({
-            data
-        });
-    }
     async getEvtolById(id) {
         const findEvtol = await db_1.db.evtol.findUnique({
             where: { id }
@@ -35,12 +30,6 @@ class EvtolServicesImpl {
             throw new Error(`Evtol with id: ${id} not found`);
         }
         return findEvtol;
-    }
-    async getEvtolLoad(orderId) {
-        const findOrder = await db_1.db.load.findMany({
-            where: { orderId }
-        });
-        return findOrder;
     }
     async getAllEvtols() {
         const allEvtols = await db_1.db.evtol.findMany({});
