@@ -28,10 +28,10 @@ enum EvtolModel {
 enum EvtolState {
   IDLE
   LOADING
-  LOADED
   DELIVERING
-  DELIVERED
   RETURNING
+  MAINTENANCE
+  OFFLINE
 }
 
 enum Regions {
@@ -47,53 +47,17 @@ enum Regions {
 
 enum Status {
   PENDING
-  COMPLETED
+  IN_TRANSIT
+  DELIVERED
   CANCELLED
 }
 
-enum Groups {
-  Cardiovascular
-  Neurological_Psychiatric
-  Allergy_Respiratory
-  Musculoskeletal_Pain
-  Infectious_Disease
-  Gastrointestinal
-  Endocrine_Metabolic
-  Reproductive_Urological
-  Dermatological
-  General_Use
-}
-
-model Load {
-  id            String      @id @unique @default(cuid())
-  item          Medications @relation(fields: [medicationsId], references: [id])
-  medicationsId Int
-  quantity      Int
-  Order         Order?      @relation(fields: [orderId], references: [id])
-  orderId       String?
-}
-
-model Order {
-  id        String   @id @unique @default(cuid())
-  loads     Load[]
-  evtol     Evtol?   @relation(fields: [evtolId], references: [id])
-  evtolId   Int?
-  userId    String
-  reference String?  @unique
-  status    Status   @default(PENDING)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
-
-model Evtol {
-  id              Int        @id @unique @default(autoincrement())
-  serialNumber    String     @unique
-  model           EvtolModel
-  maxWeight       Int
-  image           String
-  batteryCapacity Int        @default(100)
-  state           EvtolState @default(IDLE)
-  Order           Order[]
+enum Category {
+  Emergency
+  General
+  Laboratory
+  HospitalSupplies
+  ColdChain
 }
 
 model User {
@@ -115,13 +79,77 @@ model User {
   updatedAt     DateTime  @updatedAt
 }
 
-model Medications {
-  id     Int    @id @unique @default(autoincrement())
-  name   String
-  weight Int
-  code   String @unique
-  image  String
-  price  Int
-  group  Groups @default(General_Use)
-  Load   Load[]
+model Evtol {
+  id              Int             @id @unique @default(autoincrement())
+  serialNumber    String          @unique
+  model           EvtolModel
+  maxWeight       Int
+  image           String
+  batteryCapacity Int             @default(100)
+  state           EvtolState      @default(IDLE)
+  Orders          DeliveryOrder[]
 }
+
+model MedicalSupply {
+  id          Int      @id @unique @default(autoincrement())
+  name        String
+  description String
+  weight      Int
+  image       String
+  price       Int
+  category    Category @default(General)
+}
+
+model OrderItem {
+  id          Int           @id @default(autoincrement())
+  order       DeliveryOrder @relation(fields: [orderId], references: [id])
+  orderId     String
+  supplyId    Int
+  quantity    Int           @default(1)
+  totalWeight Int
+  totalPrice  Int
+}
+
+model DeliveryOrder {
+  id        String      @id @unique @default(cuid())
+  evtol     Evtol?      @relation(fields: [evtolId], references: [id])
+  evtolId   Int?
+  userId    String
+  OrderItem OrderItem[]
+  reference String?     @unique
+  status    Status      @default(PENDING)
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+}
+
+// model Load {
+//   id            String      @id @unique @default(cuid())
+//   item          Medications @relation(fields: [medicationsId], references: [id])
+//   medicationsId Int
+//   quantity      Int
+//   Order         Order?      @relation(fields: [orderId], references: [id])
+//   orderId       String?
+// }
+
+// model Order {
+//   id        String   @id @unique @default(cuid())
+//   loads     Load[]
+//   evtol     Evtol?   @relation(fields: [evtolId], references: [id])
+//   evtolId   Int?
+//   userId    String
+//   reference String?  @unique
+//   status    Status   @default(PENDING)
+//   createdAt DateTime @default(now())
+//   updatedAt DateTime @updatedAt
+// }
+
+// model Medications {
+//   id     Int    @id @unique @default(autoincrement())
+//   name   String
+//   weight Int
+//   code   String @unique
+//   image  String
+//   price  Int
+//   group  Category @default(General)
+//   Load   Load[]
+// }

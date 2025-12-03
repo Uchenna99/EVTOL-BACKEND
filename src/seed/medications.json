@@ -2,73 +2,73 @@
     {
         "id": 2,
         "name": "Vitamin C",
+        "description":"Item description",
         "weight": 90,
-        "code": "VIT_001",
         "image": "https://res.cloudinary.com/df6xz7bqp/image/upload/v1742811109/vitaminC_hvs9de.png",
         "price": 2000,
-        "group": "General_Use"
+        "category": "General"
     },
     {
         "id": 6,
         "name": "Amatem Softgel",
+        "description":"Item description",
         "weight": 50,
-        "code": "AMA-001",
         "image": "https://res.cloudinary.com/df6xz7bqp/image/upload/v1742814626/Amatem_Fort_Artemether_pku5cz.webp",
         "price": 3000,
-        "group": "General_Use"
+        "category": "General"
     },
     {
         "id": 7,
         "name": "Syringes",
+        "description":"Item description",
         "weight": 25,
-        "code": "SYR-001",
         "image": "https://res.cloudinary.com/df6xz7bqp/image/upload/v1742928426/61y9ii_QfmL._AC_SL1170__rkdujb.jpg",
         "price": 4000,
-        "group": "General_Use"
+        "category": "General"
     },
     {
         "id": 8,
         "name": "Epinephrine",
+        "description":"Item description",
         "weight": 25,
-        "code": "EPI-001",
         "image": "https://res.cloudinary.com/df6xz7bqp/image/upload/v1742929223/epinephrine_epuubf.jpg",
         "price": 5200,
-        "group": "General_Use"
+        "category": "General"
     },
     {
         "id": 1,
         "name": "Ibuprofen",
+        "description":"Item description",
         "weight": 60,
-        "code": "IBU_001",
         "image": "https://res.cloudinary.com/df6xz7bqp/image/upload/v1742811109/ibuprofen_kpttux.png",
         "price": 1400,
-        "group": "Musculoskeletal_Pain"
+        "category": "General"
     },
     {
         "id": 3,
         "name": "Astymin Syrup",
+        "description":"Item description",
         "weight": 250,
-        "code": "AST-001",
         "image": "https://res.cloudinary.com/df6xz7bqp/image/upload/v1742811110/astymin_ledhyn.png",
         "price": 4500,
-        "group": "Allergy_Respiratory"
+        "category": "General"
     },
     {
         "id": 4,
         "name": "Combantrin",
+        "description":"Item description",
         "weight": 50,
-        "code": "COM-001",
         "image": "https://res.cloudinary.com/df6xz7bqp/image/upload/v1742811110/combantrin_fm9ef7.png",
         "price": 2400,
-        "group": "Gastrointestinal"
+        "category": "General"
     },
     {
         "id": 5,
         "name": "Paracetamol",
+        "description":"Item description",
         "weight": 90,
-        "code": "PARA-001",
         "image": "https://res.cloudinary.com/df6xz7bqp/image/upload/w_1000,ar_1:1,c_fill,g_auto,e_art:hokusai/v1742811111/paracetamol_vv5cee.png",
         "price": 1200,
-        "group": "Musculoskeletal_Pain"
+        "category": "General"
     }
 ]
