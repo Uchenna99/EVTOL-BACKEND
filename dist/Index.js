@@ -33,7 +33,7 @@ const corsOptions = {
 app.use((0, cors_1.default)(corsOptions));
 app.use(express_1.default.json());
 app.get("/", (req, res) => {
-    res.send("Welcome to the backend server");
+    res.send("Evtol Server is running 🚀");
 });
 app.use('/api/v1/users', user_route_1.default);
 app.use('/api/v1/evtol', evtol_route_1.default);
