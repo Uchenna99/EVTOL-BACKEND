@@ -1,8 +1,5 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.AuthController = void 0;
-const authServices_impl_1 = require("../services/implementation/authServices.impl");
-class AuthController {
+import { AuthServicesImpl } from "../services/implementation/authServices.impl";
+export class AuthController {
     constructor() {
         this.login = async (req, res, next) => {
             try {
@@ -24,7 +21,6 @@ class AuthController {
                 next(error);
             }
         };
-        this.authServices = new authServices_impl_1.AuthServicesImpl();
+        this.authServices = new AuthServicesImpl();
     }
 }
-exports.AuthController = AuthController;

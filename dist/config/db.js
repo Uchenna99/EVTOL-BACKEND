@@ -1,9 +1,7 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.db = void 0;
-const client_1 = require("@prisma/client");
+import { PrismaClient } from "@prisma/client";
 let db;
 if (!global.__db) {
-    global.__db = new client_1.PrismaClient();
+    global.__db = new PrismaClient();
 }
-exports.db = db = global.__db;
+db = global.__db;
+export { db };

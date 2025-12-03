@@ -1,7 +1,4 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.CustomError = void 0;
-class CustomError extends Error {
+export class CustomError extends Error {
     constructor(statusCode, message, isOperational = true) {
         super(message);
         this.statusCode = statusCode;
@@ -11,4 +8,3 @@ class CustomError extends Error {
         this.name = this.constructor.name;
     }
 }
-exports.CustomError = CustomError;

@@ -1,18 +1,11 @@
-"use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.sendOtpEmail = sendOtpEmail;
-exports.welcomeEmail = welcomeEmail;
-const nodemailer_1 = __importDefault(require("nodemailer"));
-const dotenv_1 = __importDefault(require("dotenv"));
-const render_1 = require("@react-email/render");
-const otpEmail_1 = __importDefault(require("./otpEmail"));
-const react_1 = __importDefault(require("react"));
-const welcomeEmail_1 = __importDefault(require("./welcomeEmail"));
-dotenv_1.default.config();
-const transporter = nodemailer_1.default.createTransport({
+import { jsx as _jsx } from "react/jsx-runtime";
+import nodemailer from "nodemailer";
+import dotenv from "dotenv";
+import { render } from "@react-email/render";
+import OtpEmail from "./otpEmail";
+import WelcomeEmail from "./welcomeEmail";
+dotenv.config();
+const transporter = nodemailer.createTransport({
     host: process.env.SMTP_HOST,
     port: Number(process.env.SMTP_PORT),
     secure: false,
@@ -24,8 +17,8 @@ const transporter = nodemailer_1.default.createTransport({
         rejectUnauthorized: false, // Bypass certificate validation
     }
 });
-async function sendOtpEmail({ to, subject, otp }) {
-    const emailHtml = await (0, render_1.render)(react_1.default.createElement(otpEmail_1.default, { otp: otp }));
+export async function sendOtpEmail({ to, subject, otp }) {
+    const emailHtml = await render(_jsx(OtpEmail, { otp: otp }));
     try {
         await transporter.sendMail({
             from: `EVTOL <${process.env.SMTP_USER}>`,
@@ -39,8 +32,8 @@ async function sendOtpEmail({ to, subject, otp }) {
         throw new Error("Sending verification email failed");
     }
 }
-async function welcomeEmail({ to, subject, name }) {
-    const emailHtml = await (0, render_1.render)(react_1.default.createElement(welcomeEmail_1.default, { name: name }));
+export async function welcomeEmail({ to, subject, name }) {
+    const emailHtml = await render(_jsx(WelcomeEmail, { name: name }));
     await transporter.sendMail({
         from: `EVTOL <${process.env.SMTP_USER}>`,
         to,

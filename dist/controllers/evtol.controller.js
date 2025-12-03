@@ -1,8 +1,5 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.EvtolController = void 0;
-const evtolServices_impl_1 = require("../services/implementation/evtolServices.impl");
-class EvtolController {
+import { EvtolServicesImpl } from "../services/implementation/evtolServices.impl";
+export class EvtolController {
     constructor() {
         this.createEvtol = async (req, res, next) => {
             try {
@@ -54,7 +51,6 @@ class EvtolController {
                 next(error);
             }
         };
-        this.evtolServices = new evtolServices_impl_1.EvtolServicesImpl();
+        this.evtolServices = new EvtolServicesImpl();
     }
 }
-exports.EvtolController = EvtolController;
