@@ -1,10 +1,12 @@
 {
   "version": 2,
   "buildCommand": "npm run build",
-  "builds": [
-    { "src": "dist/src/vercel.js", "use": "@vercel/node" }
-  ],
+  "functions": {
+    "api/**.js": {
+      "runtime": "vercel-node@3"
+    }
+  },
   "routes": [
-    { "src": "/(.*)", "dest": "dist/src/vercel.js" }
+    { "src": "/(.*)", "dest": "/api/vercel.js" }
   ]
 }
