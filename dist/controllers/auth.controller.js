@@ -1,5 +1,8 @@
-import { AuthServicesImpl } from "../services/implementation/authServices.impl";
-export class AuthController {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.AuthController = void 0;
+const authServices_impl_1 = require("../services/implementation/authServices.impl");
+class AuthController {
     constructor() {
         this.login = async (req, res, next) => {
             try {
@@ -21,6 +24,7 @@ export class AuthController {
                 next(error);
             }
         };
-        this.authServices = new AuthServicesImpl();
+        this.authServices = new authServices_impl_1.AuthServicesImpl();
     }
 }
+exports.AuthController = AuthController;

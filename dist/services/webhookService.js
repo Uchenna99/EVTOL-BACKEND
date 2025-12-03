@@ -1,9 +1,15 @@
-import crypto from 'crypto';
-import dotenv from "dotenv";
-dotenv.config();
-export const webhook = async (req, res) => {
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.webhook = void 0;
+const crypto_1 = __importDefault(require("crypto"));
+const dotenv_1 = __importDefault(require("dotenv"));
+dotenv_1.default.config();
+const webhook = async (req, res) => {
     const secret = process.env.PAYSTACK_SECRET_KEY;
-    const hash = crypto.createHmac('sha512', secret).update(JSON.stringify(req.body)).digest('hex');
+    const hash = crypto_1.default.createHmac('sha512', secret).update(JSON.stringify(req.body)).digest('hex');
     const signature = req.headers['x-paystack-signature'];
     if (hash !== signature) {
         res.status(401).send('Invalid signature');
@@ -28,3 +34,4 @@ export const webhook = async (req, res) => {
     }
     res.status(200).send('Webhook received');
 };
+exports.webhook = webhook;

@@ -1,12 +1,17 @@
-import { jsx as _jsx } from "react/jsx-runtime";
-import nodemailer from 'nodemailer';
-import dotenv from 'dotenv';
-import juice from 'juice';
-import ReactDOMServer from 'react-dom/server';
-import OtpEmail from './OtpEmail';
-dotenv.config();
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const nodemailer_1 = __importDefault(require("nodemailer"));
+const dotenv_1 = __importDefault(require("dotenv"));
+const juice_1 = __importDefault(require("juice"));
+const server_1 = __importDefault(require("react-dom/server"));
+const OtpEmail_1 = __importDefault(require("./OtpEmail"));
+const react_1 = __importDefault(require("react"));
+dotenv_1.default.config();
 const testEmail = async () => {
-    const transporter = nodemailer.createTransport({
+    const transporter = nodemailer_1.default.createTransport({
         service: 'gmail',
         auth: {
             user: process.env.SMTP_USER,
@@ -17,9 +22,9 @@ const testEmail = async () => {
         },
     });
     // Render React component to HTML string
-    const reactHtml = ReactDOMServer.renderToString(_jsx(OtpEmail, { otp: '12345' }));
+    const reactHtml = server_1.default.renderToString(react_1.default.createElement(OtpEmail_1.default, { otp: '12345' }));
     // Inline CSS using juice
-    const inlinedHtml = juice(reactHtml);
+    const inlinedHtml = (0, juice_1.default)(reactHtml);
     const mailOptions = {
         from: process.env.MAIL_USER,
         to: 'federalagbu@yahoo.com',

@@ -1,13 +1,18 @@
-import express from "express";
-import cors from "cors";
-import dotenv from "dotenv";
-import userRouter from "./routes/user.route";
-import evtolRouter from "./routes/evtol.route";
-import authRouter from "./routes/auth.route";
-import adminRouter from "./routes/admin.route";
-import paymentRouter from "./routes/payment.route";
-import portfolioRouter from "./routes/portfolio.route";
-dotenv.config();
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = __importDefault(require("express"));
+const cors_1 = __importDefault(require("cors"));
+const dotenv_1 = __importDefault(require("dotenv"));
+const user_route_1 = __importDefault(require("./routes/user.route"));
+const evtol_route_1 = __importDefault(require("./routes/evtol.route"));
+const auth_route_1 = __importDefault(require("./routes/auth.route"));
+const admin_route_1 = __importDefault(require("./routes/admin.route"));
+const payment_route_1 = __importDefault(require("./routes/payment.route"));
+const portfolio_route_1 = __importDefault(require("./routes/portfolio.route"));
+dotenv_1.default.config();
 const portEnv = process.env.PORT;
 if (!portEnv) {
     console.error('Error: PORT is not defined in .env file');
@@ -18,25 +23,25 @@ if (isNaN(PORT)) {
     console.error('Error: PORT is not a number in .env file');
     process.exit(1);
 }
-const app = express();
+const app = (0, express_1.default)();
 const corsOptions = {
     origin: '*',
     credentilas: true,
     allowedHeaders: '*',
     methods: 'GET, POST, PUT, PATCH, DELETE, HEAD'
 };
-app.use(cors(corsOptions));
-app.use(express.json());
+app.use((0, cors_1.default)(corsOptions));
+app.use(express_1.default.json());
 app.get("/", (req, res) => {
     res.send("Evtol Server is running 🚀");
 });
-app.use('/api/v1/users', userRouter);
-app.use('/api/v1/evtol', evtolRouter);
-app.use('/api/v1/auth', authRouter);
-app.use('/api/v1/admin', adminRouter);
-app.use('/api/v1/payment', paymentRouter);
-app.use('/api/v1/email', portfolioRouter);
+app.use('/api/v1/users', user_route_1.default);
+app.use('/api/v1/evtol', evtol_route_1.default);
+app.use('/api/v1/auth', auth_route_1.default);
+app.use('/api/v1/admin', admin_route_1.default);
+app.use('/api/v1/payment', payment_route_1.default);
+app.use('/api/v1/email', portfolio_route_1.default);
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
-export default app;
+exports.default = app;

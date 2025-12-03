@@ -1,5 +1,8 @@
-import { AdminServicesImpl } from "../services/implementation/adminServices.impl";
-export class AdminController {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.AdminController = void 0;
+const adminServices_impl_1 = require("../services/implementation/adminServices.impl");
+class AdminController {
     constructor() {
         this.getAllOrders = async (req, res, next) => {
             try {
@@ -10,6 +13,7 @@ export class AdminController {
                 next(error);
             }
         };
-        this.adminServices = new AdminServicesImpl();
+        this.adminServices = new adminServices_impl_1.AdminServicesImpl();
     }
 }
+exports.AdminController = AdminController;

@@ -1,14 +1,17 @@
-import { db } from "../../config/db";
-export class EvtolServicesImpl {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.EvtolServicesImpl = void 0;
+const db_1 = require("../../config/db");
+class EvtolServicesImpl {
     async createEvtol(data) {
-        const findEvtol = await db.evtol.findUnique({
+        const findEvtol = await db_1.db.evtol.findUnique({
             where: { serialNumber: data.serialNumber }
         });
         if (findEvtol) {
             throw new Error(`Evtol with serial number ${data.serialNumber} already exists`);
         }
         else {
-            const newEvtol = await db.evtol.create({
+            const newEvtol = await db_1.db.evtol.create({
                 data: {
                     serialNumber: data.serialNumber,
                     maxWeight: data.maxWeight,
@@ -20,12 +23,12 @@ export class EvtolServicesImpl {
         }
     }
     async createLoad(data) {
-        await db.load.createMany({
+        await db_1.db.load.createMany({
             data
         });
     }
     async getEvtolById(id) {
-        const findEvtol = await db.evtol.findUnique({
+        const findEvtol = await db_1.db.evtol.findUnique({
             where: { id }
         });
         if (!findEvtol) {
@@ -34,17 +37,17 @@ export class EvtolServicesImpl {
         return findEvtol;
     }
     async getEvtolLoad(orderId) {
-        const findOrder = await db.load.findMany({
+        const findOrder = await db_1.db.load.findMany({
             where: { orderId }
         });
         return findOrder;
     }
     async getAllEvtols() {
-        const allEvtols = await db.evtol.findMany({});
+        const allEvtols = await db_1.db.evtol.findMany({});
         return allEvtols;
     }
     async getAvailableEvtols(data) {
-        return await db.evtol.findMany({
+        return await db_1.db.evtol.findMany({
             where: {
                 batteryCapacity: { gt: 25 },
                 maxWeight: { gte: data.weight }
@@ -52,3 +55,4 @@ export class EvtolServicesImpl {
         });
     }
 }
+exports.EvtolServicesImpl = EvtolServicesImpl;

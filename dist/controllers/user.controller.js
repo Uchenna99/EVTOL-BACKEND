@@ -1,5 +1,8 @@
-import { UserServicesImpl } from "../services/implementation/userServices.impl";
-export class UserController {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.UserController = void 0;
+const userServices_impl_1 = require("../services/implementation/userServices.impl");
+class UserController {
     constructor() {
         this.createUser = async (req, res, next) => {
             try {
@@ -49,6 +52,7 @@ export class UserController {
                 next(error);
             }
         };
-        this.userServices = new UserServicesImpl();
+        this.userServices = new userServices_impl_1.UserServicesImpl();
     }
 }
+exports.UserController = UserController;
