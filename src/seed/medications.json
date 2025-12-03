@@ -24,7 +24,7 @@
         "weight": 25,
         "image": "https://res.cloudinary.com/df6xz7bqp/image/upload/v1742928426/61y9ii_QfmL._AC_SL1170__rkdujb.jpg",
         "price": 4000,
-        "category": "General"
+        "category": "HospitalSupplies"
     },
     {
         "id": 8,
@@ -33,7 +33,7 @@
         "weight": 25,
         "image": "https://res.cloudinary.com/df6xz7bqp/image/upload/v1742929223/epinephrine_epuubf.jpg",
         "price": 5200,
-        "category": "General"
+        "category": "Emergency"
     },
     {
         "id": 1,
@@ -70,5 +70,41 @@
         "image": "https://res.cloudinary.com/df6xz7bqp/image/upload/w_1000,ar_1:1,c_fill,g_auto,e_art:hokusai/v1742811111/paracetamol_vv5cee.png",
         "price": 1200,
         "category": "General"
+    },
+    {
+        "id": 9,
+        "name": "BCG Vaccine",
+        "description":"Item description",
+        "weight": 90,
+        "image": "https://res.cloudinary.com/df6xz7bqp/image/upload/v1764795714/pq_118_BCG_20dose_SII_container_image-Hadapsar_e7fnsp.jpg",
+        "price": 10000,
+        "category": "ColdChain"
+    },
+    {
+        "id": 10,
+        "name": "Covid-19 Vaccine",
+        "description":"Item description",
+        "weight": 90,
+        "image": "https://res.cloudinary.com/df6xz7bqp/image/upload/v1764796003/close-up-of-COVID-19-vaccine-vial-being-held-by-a-person-wearing-a-blue-PPE-glove-shutterstock_1678629760_Fotor-16x9-1-min_zherk7.jpg",
+        "price": 14000,
+        "category": "ColdChain"
+    },
+    {
+        "id": 11,
+        "name": "HIV Test Kit",
+        "description":"Item description",
+        "weight": 100,
+        "image": "https://res.cloudinary.com/df6xz7bqp/image/upload/v1764795714/OraQuick-HIV-Self-Test-Kit-1-Test_nyewiq.jpg",
+        "price": 8400,
+        "category": "Laboratory"
+    },
+    {
+        "id": 12,
+        "name": "Blood Unit",
+        "description":"Item description",
+        "weight": 400,
+        "image": "https://res.cloudinary.com/df6xz7bqp/image/upload/v1764795714/OraQuick-HIV-Self-Test-Kit-1-Test_nyewiq.jpg",
+        "price": 37000,
+        "category": "Emergency"
     }
 ]

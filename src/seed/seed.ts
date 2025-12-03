@@ -1,4 +1,4 @@
-import { Medications, PrismaClient } from "@prisma/client";
+import { MedicalSupply, PrismaClient } from "@prisma/client";
 import * as fs from "fs";
 import * as path from "path";
 import './medications.json'
@@ -8,20 +8,20 @@ const prisma = new PrismaClient();
 async function main() {
     console.log("🌱 Seeding data...");
 
-    const medications: Medications[] = JSON.parse(
+    const medications: MedicalSupply[] = JSON.parse(
         fs.readFileSync(path.resolve(__dirname, "medications.json"), "utf-8")
     );
     for (const med of medications) {
-        await prisma.medications.upsert({
+        await prisma.medicalSupply.upsert({
             where: {id: med.id},
             update:{},
             create: {
                 name: med.name,
+                description: med.description,
                 price: med.price,
                 image: med.image,
                 weight: med.weight,
-                code: med.code,
-                group: med.group,
+                category: med.category
             }
         })
     }

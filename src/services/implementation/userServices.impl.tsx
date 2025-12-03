@@ -1,4 +1,4 @@
-import { Load, Medications, Order, User } from "@prisma/client";
+import { DeliveryOrder, MedicalSupply, User } from "@prisma/client";
 import { CreatUserDTO } from "../../dto/CreatUser.dto";
 import { UserServices } from "../userServices";
 import { db } from "../../config/db";
@@ -52,23 +52,23 @@ export class UserServicesImpl implements UserServices{
             // })
             // .catch((error)=> {throw new Error(error)})
 
-            const template = <OtpEmail otp={otp} />;
-            const response: EmailResponse = await emailService.sendEmail(data.email, "Verify your email", template);
+            // const template = <OtpEmail otp={otp} />;
+            // const response: EmailResponse = await emailService.sendEmail(data.email, "Verify your email", template);
 
-            if (response.success) {
-                await db.user.update({
-                    where: {email: data.email},
-                    data: {
-                        otp: await hashPassword(otp),
-                        otpExpiry: this.generateOtpExpiration()
-                    }
-                })
-                return newUser;
-            } else {
-                return response;
-            }
+            // if (response.success) {
+            //     await db.user.update({
+            //         where: {email: data.email},
+            //         data: {
+            //             otp: await hashPassword(otp),
+            //             otpExpiry: this.generateOtpExpiration()
+            //         }
+            //     })
+            //     return newUser;
+            // } else {
+            //     return response;
+            // }
 
-            // return newUser;
+            return newUser;
         }
     }
     
@@ -109,24 +109,24 @@ export class UserServicesImpl implements UserServices{
     }
     
     
-    async createOrder(data: CreateOrderDTO): Promise<Order> {
-        const newOrder = await db.order.create({
+    async createOrder(data: CreateOrderDTO): Promise<DeliveryOrder> {
+        const newOrder = await db.deliveryOrder.create({
             data
         });
         return newOrder;
     }
     
     
-    async getAllMeds(): Promise<Medications[]> {
-        const allMeds = await db.medications.findMany({});
+    async getAllMeds(): Promise<MedicalSupply[]> {
+        const allMeds = await db.medicalSupply.findMany({});
         return allMeds;
     }
 
 
-    async getUserOrders(id: string): Promise<Order[]> {
-        const orders = await db.order.findMany({
+    async getUserOrders(id: string): Promise<DeliveryOrder[]> {
+        const orders = await db.deliveryOrder.findMany({
             where: {userId: id},
-            include: {loads: true}
+            include: {OrderItem: true}
         });
         return orders;
     }
