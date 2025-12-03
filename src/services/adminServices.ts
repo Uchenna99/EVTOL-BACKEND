@@ -1,6 +1,6 @@
-import { Order } from "@prisma/client";
+import { DeliveryOrder } from "@prisma/client";
 
 
 export interface AdminServices {
-    getAllOrders (): Promise<Order[]>;
+    getAllOrders (): Promise<DeliveryOrder[]>;
 }
