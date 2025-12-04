@@ -33,6 +33,7 @@ export class UserServicesImpl implements UserServices{
                 age: data.age,
                 phoneNumber: data.phoneNumber,
                 email: data.email,
+                occupation: data.occupation,
                 password: await hashPassword(data.password)
             }
         });

@@ -1,4 +1,3 @@
-import { Regions } from "@prisma/client";
 import { IsEmail, IsNotEmpty, IsNumber, IsString, Length } from "class-validator";
 
 
@@ -18,6 +17,9 @@ export class CreatUserDTO {
 
     @IsNotEmpty()
     age!: string;
+
+    @IsString()
+    occupation!: string;
 
     @IsNotEmpty()
     @IsString()
