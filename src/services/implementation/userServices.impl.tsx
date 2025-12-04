@@ -20,55 +20,56 @@ export class UserServicesImpl implements UserServices{
         const findUser = await db.user.findUnique({
             where: {email: data.email}
         });
+
         if(findUser){
-            throw new Error('Sorry, this email has already been used')
-        }else{
-            const otp = generateOtp();
-            const newUser = await db.user.create({
-                data: {
-                    firstName: data.firstName,
-                    lastName: data.lastName,
-                    age: data.age,
-                    phoneNumber: data.phoneNumber,
-                    email: data.email,
-                    password: await hashPassword(data.password)
-                }
-            });
-
-            // await sendOtpEmail({
-            //     to: data.email,
-            //     subject: "Verify your email",
-            //     otp: otp,
-            // })
-            // .then(async ()=>{
-            //     await db.user.update({
-            //         where: {email: data.email},
-            //         data: {
-            //             otp: await hashPassword(otp),
-            //             otpExpiry: this.generateOtpExpiration()
-            //         }
-            //     })
-            // })
-            // .catch((error)=> {throw new Error(error)})
-
-            // const template = <OtpEmail otp={otp} />;
-            // const response: EmailResponse = await emailService.sendEmail(data.email, "Verify your email", template);
-
-            // if (response.success) {
-            //     await db.user.update({
-            //         where: {email: data.email},
-            //         data: {
-            //             otp: await hashPassword(otp),
-            //             otpExpiry: this.generateOtpExpiration()
-            //         }
-            //     })
-            //     return newUser;
-            // } else {
-            //     return response;
-            // }
-
-            return newUser;
+            throw new Error('Sorry, this email has already been used');
         }
+
+        const otp = generateOtp();
+        const newUser = await db.user.create({
+            data: {
+                firstName: data.firstName,
+                lastName: data.lastName,
+                age: data.age,
+                phoneNumber: data.phoneNumber,
+                email: data.email,
+                password: await hashPassword(data.password)
+            }
+        });
+
+        // await sendOtpEmail({
+        //     to: data.email,
+        //     subject: "Verify your email",
+        //     otp: otp,
+        // })
+        // .then(async ()=>{
+        //     await db.user.update({
+        //         where: {email: data.email},
+        //         data: {
+        //             otp: await hashPassword(otp),
+        //             otpExpiry: this.generateOtpExpiration()
+        //         }
+        //     })
+        // })
+        // .catch((error)=> {throw new Error(error)})
+
+        // const template = <OtpEmail otp={otp} />;
+        // const response: EmailResponse = await emailService.sendEmail(data.email, "Verify your email", template);
+
+        // if (response.success) {
+        //     await db.user.update({
+        //         where: {email: data.email},
+        //         data: {
+        //             otp: await hashPassword(otp),
+        //             otpExpiry: this.generateOtpExpiration()
+        //         }
+        //     })
+        //     return newUser;
+        // } else {
+        //     return response;
+        // }
+
+        return newUser;
     }
     
     
