@@ -7,7 +7,7 @@ export class AdminServicesImpl implements AdminServices{
 
     async getAllOrders(): Promise<DeliveryOrder[]> {
         const orders = await db.deliveryOrder.findMany({
-            include: {OrderItem: true}
+            include: {orderItem: true}
         })
         return orders;
     }
