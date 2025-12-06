@@ -113,8 +113,13 @@ export class UserServicesImpl implements UserServices{
     
     async createOrder(data: CreateOrderDTO): Promise<DeliveryOrder> {
         const newOrder = await db.deliveryOrder.create({
-            data,
-            include: {orderItem: true}
+            data: {
+                evtolId: data.evtolId,
+                userId: data.userId,
+                reference: data.reference,
+                destination: data.destination,
+            },
+            include: {orderItem: {include: {order: true}}}
         });
         return newOrder;
     }
@@ -129,7 +134,7 @@ export class UserServicesImpl implements UserServices{
     async getUserOrders(id: string): Promise<DeliveryOrder[]> {
         const orders = await db.deliveryOrder.findMany({
             where: {userId: id},
-            include: {orderItem: true}
+            include: {orderItem: {include: {order: true}}}
         });
         return orders;
     }
