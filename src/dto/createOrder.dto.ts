@@ -15,4 +15,8 @@ export class CreateOrderDTO {
     @IsString()
     reference!: string;
 
+    @IsNotEmpty()
+    @IsString()
+    destination!: string;
+
 }

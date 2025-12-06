@@ -21,21 +21,21 @@ export const webhook = async (req: Request, res: Response) => {
     if (event.event === 'charge.success') {
       const payment = event.data;
       console.log("Event info", payment);
-    //   const reference = payment.reference;
+      const reference = payment.reference;
 
-    //   try {
-    //     // ✅ Update order where reference matches
-    //     const updatedOrder = await db.order.update({
-    //       where: { reference },
-    //       data: {
-    //         status: 'COMPLETED',
-    //       },
-    //     });
+      try {
+        // ✅ Update order where reference matches
+        const updatedOrder = await db.deliveryOrder.update({
+          where: { reference },
+          data: {
+            status: 'SUCCESSFUL',
+          },
+        });
 
-    //     console.log('✅ Order updated:', updatedOrder);
-    //   } catch (err) {
-    //     console.error('Error updating order:', err);
-    //   }
+        console.log('✅ Order updated:', updatedOrder);
+      } catch (err) {
+        console.error('Error updating order:', err);
+      }
     }
 
     res.status(200).send('Webhook received');

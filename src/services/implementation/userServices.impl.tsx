@@ -77,7 +77,8 @@ export class UserServicesImpl implements UserServices{
     async getUserById(id: string): Promise<Partial<User>> {
         const findUser = await db.user.findFirst({
             where: {id},
-            omit: {password:true, otp: true, otpExpiry: true, createdAt: true, updatedAt: true}
+            omit: {password:true, otp: true, otpExpiry: true, createdAt: true, updatedAt: true},
+            include: {orderHistory: true}
         });
         if(!findUser){
             throw new Error(`User with id: ${id} not found`);
@@ -112,7 +113,8 @@ export class UserServicesImpl implements UserServices{
     
     async createOrder(data: CreateOrderDTO): Promise<DeliveryOrder> {
         const newOrder = await db.deliveryOrder.create({
-            data
+            data,
+            include: {orderItem: true}
         });
         return newOrder;
     }
@@ -127,7 +129,7 @@ export class UserServicesImpl implements UserServices{
     async getUserOrders(id: string): Promise<DeliveryOrder[]> {
         const orders = await db.deliveryOrder.findMany({
             where: {userId: id},
-            include: {OrderItem: true}
+            include: {orderItem: true}
         });
         return orders;
     }
