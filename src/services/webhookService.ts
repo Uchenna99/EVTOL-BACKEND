@@ -28,7 +28,7 @@ export const webhook = async (req: Request, res: Response) => {
         const updatedOrder = await db.deliveryOrder.update({
           where: { reference },
           data: {
-            status: 'SUCCESSFUL',
+            paymentStatus: 'SUCCESSFUL',
           },
         });
 
