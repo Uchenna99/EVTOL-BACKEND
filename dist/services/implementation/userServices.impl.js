@@ -17,54 +17,54 @@ class UserServicesImpl {
         if (findUser) {
             throw new Error('Sorry, this email has already been used');
         }
-        else {
-            const otp = (0, otp_utils_1.generateOtp)();
-            const newUser = await db_1.db.user.create({
-                data: {
-                    firstName: data.firstName,
-                    lastName: data.lastName,
-                    age: data.age,
-                    phoneNumber: data.phoneNumber,
-                    email: data.email,
-                    password: await (0, password_utils_1.hashPassword)(data.password)
-                }
-            });
-            // await sendOtpEmail({
-            //     to: data.email,
-            //     subject: "Verify your email",
-            //     otp: otp,
-            // })
-            // .then(async ()=>{
-            //     await db.user.update({
-            //         where: {email: data.email},
-            //         data: {
-            //             otp: await hashPassword(otp),
-            //             otpExpiry: this.generateOtpExpiration()
-            //         }
-            //     })
-            // })
-            // .catch((error)=> {throw new Error(error)})
-            // const template = <OtpEmail otp={otp} />;
-            // const response: EmailResponse = await emailService.sendEmail(data.email, "Verify your email", template);
-            // if (response.success) {
-            //     await db.user.update({
-            //         where: {email: data.email},
-            //         data: {
-            //             otp: await hashPassword(otp),
-            //             otpExpiry: this.generateOtpExpiration()
-            //         }
-            //     })
-            //     return newUser;
-            // } else {
-            //     return response;
-            // }
-            return newUser;
-        }
+        const otp = (0, otp_utils_1.generateOtp)();
+        const newUser = await db_1.db.user.create({
+            data: {
+                firstName: data.firstName,
+                lastName: data.lastName,
+                age: data.age,
+                phoneNumber: data.phoneNumber,
+                email: data.email,
+                occupation: data.occupation,
+                password: await (0, password_utils_1.hashPassword)(data.password)
+            }
+        });
+        // await sendOtpEmail({
+        //     to: data.email,
+        //     subject: "Verify your email",
+        //     otp: otp,
+        // })
+        // .then(async ()=>{
+        //     await db.user.update({
+        //         where: {email: data.email},
+        //         data: {
+        //             otp: await hashPassword(otp),
+        //             otpExpiry: this.generateOtpExpiration()
+        //         }
+        //     })
+        // })
+        // .catch((error)=> {throw new Error(error)})
+        // const template = <OtpEmail otp={otp} />;
+        // const response: EmailResponse = await emailService.sendEmail(data.email, "Verify your email", template);
+        // if (response.success) {
+        //     await db.user.update({
+        //         where: {email: data.email},
+        //         data: {
+        //             otp: await hashPassword(otp),
+        //             otpExpiry: this.generateOtpExpiration()
+        //         }
+        //     })
+        //     return newUser;
+        // } else {
+        //     return response;
+        // }
+        return newUser;
     }
     async getUserById(id) {
         const findUser = await db_1.db.user.findFirst({
             where: { id },
-            omit: { password: true, otp: true, otpExpiry: true, createdAt: true, updatedAt: true }
+            omit: { password: true, otp: true, otpExpiry: true, createdAt: true, updatedAt: true },
+            include: { orderHistory: true }
         });
         if (!findUser) {
             throw new Error(`User with id: ${id} not found`);
@@ -95,7 +95,13 @@ class UserServicesImpl {
     }
     async createOrder(data) {
         const newOrder = await db_1.db.deliveryOrder.create({
-            data
+            data: {
+                evtolId: data.evtolId,
+                userId: data.userId,
+                reference: data.reference,
+                destination: data.destination,
+            },
+            include: { orderItem: { include: { order: true } } }
         });
         return newOrder;
     }
@@ -106,7 +112,7 @@ class UserServicesImpl {
     async getUserOrders(id) {
         const orders = await db_1.db.deliveryOrder.findMany({
             where: { userId: id },
-            include: { OrderItem: true }
+            include: { orderItem: { include: { order: true } } }
         });
         return orders;
     }

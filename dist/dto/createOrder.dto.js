@@ -23,3 +23,7 @@ __decorate([
     (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.IsString)()
 ], CreateOrderDTO.prototype, "reference", void 0);
+__decorate([
+    (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.IsString)()
+], CreateOrderDTO.prototype, "destination", void 0);

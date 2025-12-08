@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.webhook = void 0;
 const crypto_1 = __importDefault(require("crypto"));
 const dotenv_1 = __importDefault(require("dotenv"));
+const db_1 = require("../config/db");
 dotenv_1.default.config();
 const webhook = async (req, res) => {
     const secret = process.env.PAYSTACK_SECRET_KEY;
@@ -18,19 +19,20 @@ const webhook = async (req, res) => {
     if (event.event === 'charge.success') {
         const payment = event.data;
         console.log("Event info", payment);
-        //   const reference = payment.reference;
-        //   try {
-        //     // ✅ Update order where reference matches
-        //     const updatedOrder = await db.order.update({
-        //       where: { reference },
-        //       data: {
-        //         status: 'COMPLETED',
-        //       },
-        //     });
-        //     console.log('✅ Order updated:', updatedOrder);
-        //   } catch (err) {
-        //     console.error('Error updating order:', err);
-        //   }
+        const reference = payment.reference;
+        try {
+            // ✅ Update order where reference matches
+            const updatedOrder = await db_1.db.deliveryOrder.update({
+                where: { reference },
+                data: {
+                    paymentStatus: 'SUCCESSFUL',
+                },
+            });
+            console.log('✅ Order updated:', updatedOrder);
+        }
+        catch (err) {
+            console.error('Error updating order:', err);
+        }
     }
     res.status(200).send('Webhook received');
 };

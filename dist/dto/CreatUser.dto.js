@@ -28,6 +28,9 @@ __decorate([
     (0, class_validator_1.IsNotEmpty)()
 ], CreatUserDTO.prototype, "age", void 0);
 __decorate([
+    (0, class_validator_1.IsString)()
+], CreatUserDTO.prototype, "occupation", void 0);
+__decorate([
     (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.IsString)(),
     (0, class_validator_1.IsEmail)()

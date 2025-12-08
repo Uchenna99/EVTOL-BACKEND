@@ -5,7 +5,7 @@ const db_1 = require("../../config/db");
 class AdminServicesImpl {
     async getAllOrders() {
         const orders = await db_1.db.deliveryOrder.findMany({
-            include: { OrderItem: true }
+            include: { orderItem: true }
         });
         return orders;
     }
