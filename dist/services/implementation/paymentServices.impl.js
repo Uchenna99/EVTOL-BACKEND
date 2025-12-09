@@ -72,14 +72,16 @@ class PaymentServicesImpl {
             await db_1.db.deliveryOrder.update({
                 where: { reference },
                 data: {
-                    paymentStatus: client_1.PaymentStatus.FAILED
+                    paymentStatus: client_1.PaymentStatus.FAILED,
+                    deliveryStatus: client_1.DeliveryStatus.CANCELLED
                 }
             });
         }
         await db_1.db.deliveryOrder.update({
             where: { reference },
             data: {
-                paymentStatus: client_1.PaymentStatus.SUCCESSFUL
+                paymentStatus: client_1.PaymentStatus.SUCCESSFUL,
+                deliveryStatus: client_1.DeliveryStatus.IN_TRANSIT
             }
         });
         return { status, data: response.data.data };

@@ -3,7 +3,7 @@ import crypto from "crypto";
 import { db } from "../../config/db";
 import { CreateOrderDTO } from "../../dto/createOrder.dto";
 import axios from "axios";
-import { DeliveryOrder, PaymentStatus } from "@prisma/client";
+import { DeliveryOrder, DeliveryStatus, PaymentStatus } from "@prisma/client";
 import { CustomError } from "../../utils/CustomError";
 
 const PAYSTACK_SECRET_KEY = process.env.PAYSTACK_SECRET_KEY!;
@@ -86,7 +86,8 @@ export class PaymentServicesImpl implements PaymentServices {
             await db.deliveryOrder.update({
                 where: {reference},
                 data: {
-                    paymentStatus: PaymentStatus.FAILED
+                    paymentStatus: PaymentStatus.FAILED,
+                    deliveryStatus:DeliveryStatus.CANCELLED
                 }
             })
         }
@@ -94,7 +95,8 @@ export class PaymentServicesImpl implements PaymentServices {
         await db.deliveryOrder.update({
             where: {reference},
             data: {
-                paymentStatus: PaymentStatus.SUCCESSFUL
+                paymentStatus: PaymentStatus.SUCCESSFUL,
+                deliveryStatus: DeliveryStatus.IN_TRANSIT
             }
         })
 
