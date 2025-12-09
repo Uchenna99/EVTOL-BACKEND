@@ -1,11 +1,13 @@
 import express from "express"
-import bodyParser from "body-parser"
-import { initializeTransaction } from "../controllers/payment.controller";
 import { webhook } from "../services/webhookService";
+import { PaymentController } from "../controllers/payment.controller";
 
 const paymentRouter = express.Router();
+const paymentController = new PaymentController();
 
-paymentRouter.post("/initialize-paystack", initializeTransaction);
+paymentRouter.post("/initialize", paymentController.initializePayment);
+
+paymentRouter.post("/verify/:reference", paymentController.verifyPayment);
 
 paymentRouter.post("/webhook", webhook);
 

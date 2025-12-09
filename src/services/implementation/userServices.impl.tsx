@@ -6,10 +6,10 @@ import { hashPassword } from "../../utils/password.utils";
 import { sendOtpEmail } from "../../otp/email";
 import { generateOtp } from "../../utils/otp.utils";
 import { CreateOrderDTO } from "../../dto/createOrder.dto";
-import { error } from "console";
 import { EmailResponse, OtpEmail, WelcomeEmail } from "../../EmailService";
 import EmailService from "../../EmailService/EmailService";
 import React from "react";
+import { CustomError } from "../../utils/CustomError";
 
 
 const emailService = new EmailService();
@@ -22,7 +22,7 @@ export class UserServicesImpl implements UserServices{
         });
 
         if(findUser){
-            throw new Error('Sorry, this email has already been used');
+            throw new CustomError(409, 'Sorry, this email has already been used');
         }
 
         const otp = generateOtp();
@@ -81,7 +81,7 @@ export class UserServicesImpl implements UserServices{
             include: {orderHistory: true}
         });
         if(!findUser){
-            throw new Error(`User with id: ${id} not found`);
+            throw new CustomError(404, `User with id: ${id} not found`);
         }else{
             return findUser;
         }
@@ -93,7 +93,7 @@ export class UserServicesImpl implements UserServices{
             where: {id}
         });
         if(!findUser){
-            throw new Error(`User with id: ${id} not found`);
+            throw new CustomError(404, `User with id: ${id} not found`);
         }else{
             const updatedUser = await db.user.update({
                 where: {id},

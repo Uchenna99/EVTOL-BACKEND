@@ -1,10 +1,10 @@
-import { error } from "console";
 import { PaymentServices } from "../paymentServices";
 import crypto from "crypto";
 import { db } from "../../config/db";
 import { CreateOrderDTO } from "../../dto/createOrder.dto";
 import axios from "axios";
 import { DeliveryOrder, PaymentStatus } from "@prisma/client";
+import { CustomError } from "../../utils/CustomError";
 
 const PAYSTACK_SECRET_KEY = process.env.PAYSTACK_SECRET_KEY!;
 const PAYSTACK_BASE_URL = "https://api.paystack.co";
@@ -21,7 +21,7 @@ export class PaymentServicesImpl implements PaymentServices {
         // Generate reference
         const reference = `EVTOL_${crypto.randomBytes(10).toString("hex")}`;
         if (!reference) {
-            throw new Error("Failed to generate reference");
+            throw new CustomError(400, "Failed to generate reference");
         }
 
         // Create order
@@ -72,7 +72,7 @@ export class PaymentServicesImpl implements PaymentServices {
 
         // Process order based on status == "success"
         const order = await db.deliveryOrder.findUnique({ where: {reference} });
-        if(!order) { throw new Error("Order not found") }
+        if(!order) { throw new CustomError(404, "Order not found") }
 
         if(status !== "success") {
             await db.deliveryOrder.update({
