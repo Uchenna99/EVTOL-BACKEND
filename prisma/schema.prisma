@@ -108,29 +108,29 @@ model MedicalSupply {
 }
 
 model OrderItem {
-  id          Int           @id @default(autoincrement())
-  order       DeliveryOrder @relation(fields: [orderId], references: [id])
-  orderId     String
-  supplyId    Int
-  name        String
-  quantity    Int           @default(1)
-  weight Int
-  price       Int
+  id       Int           @id @default(autoincrement())
+  order    DeliveryOrder @relation(fields: [orderId], references: [id])
+  orderId  String
+  supplyId Int
+  name     String
+  quantity Int           @default(1)
+  weight   Int
+  price    Int
 }
 
 model DeliveryOrder {
-  id          String        @id @unique @default(cuid())
-  evtol       Evtol?        @relation(fields: [evtolId], references: [id])
-  evtolId     Int?
-  user        User          @relation(fields: [userId], references: [id])
-  userId      String
-  orderItem   OrderItem[]
-  reference   String?       @unique
-  paymentStatus      PaymentStatus @default(PENDING)
-  deliveryStatus  DeliveryStatus @default(PENDING)
-  destination String
-  createdAt   DateTime      @default(now())
-  updatedAt   DateTime      @updatedAt
+  id             String         @id @unique @default(cuid())
+  evtol          Evtol?         @relation(fields: [evtolId], references: [id])
+  evtolId        Int?
+  user           User           @relation(fields: [userId], references: [id])
+  userId         String
+  orderItem      OrderItem[]
+  reference      String?        @unique
+  paymentStatus  PaymentStatus  @default(PENDING)
+  deliveryStatus DeliveryStatus @default(PENDING)
+  destination    String
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
 }
 
 // model Load {

@@ -6,28 +6,36 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CreateOrderDTO = void 0;
+exports.CreateOrderItemsDTO = void 0;
 const class_validator_1 = require("class-validator");
-class CreateOrderDTO {
+class CreateOrderItemsDTO {
 }
-exports.CreateOrderDTO = CreateOrderDTO;
-__decorate([
-    (0, class_validator_1.IsNotEmpty)(),
-    (0, class_validator_1.IsEmail)()
-], CreateOrderDTO.prototype, "email", void 0);
+exports.CreateOrderItemsDTO = CreateOrderItemsDTO;
 __decorate([
     (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.IsNumber)()
-], CreateOrderDTO.prototype, "amount", void 0);
+], CreateOrderItemsDTO.prototype, "id", void 0);
 __decorate([
     (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.IsString)()
-], CreateOrderDTO.prototype, "userId", void 0);
+], CreateOrderItemsDTO.prototype, "name", void 0);
 __decorate([
     (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.IsString)()
-], CreateOrderDTO.prototype, "destination", void 0);
+], CreateOrderItemsDTO.prototype, "description", void 0);
 __decorate([
     (0, class_validator_1.IsNotEmpty)(),
-    (0, class_validator_1.IsArray)()
-], CreateOrderDTO.prototype, "items", void 0);
+    (0, class_validator_1.IsNumber)()
+], CreateOrderItemsDTO.prototype, "weight", void 0);
+__decorate([
+    (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.IsString)()
+], CreateOrderItemsDTO.prototype, "image", void 0);
+__decorate([
+    (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.IsNumber)()
+], CreateOrderItemsDTO.prototype, "price", void 0);
+__decorate([
+    (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.IsString)()
+], CreateOrderItemsDTO.prototype, "category", void 0);

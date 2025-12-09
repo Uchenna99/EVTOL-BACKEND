@@ -8,6 +8,7 @@ const db_1 = require("../../config/db");
 const password_utils_1 = require("../../utils/password.utils");
 const otp_utils_1 = require("../../utils/otp.utils");
 const EmailService_1 = __importDefault(require("../../EmailService/EmailService"));
+const CustomError_1 = require("../../utils/CustomError");
 const emailService = new EmailService_1.default();
 class UserServicesImpl {
     async createUser(data) {
@@ -15,7 +16,7 @@ class UserServicesImpl {
             where: { email: data.email }
         });
         if (findUser) {
-            throw new Error('Sorry, this email has already been used');
+            throw new CustomError_1.CustomError(409, 'Sorry, this email has already been used');
         }
         const otp = (0, otp_utils_1.generateOtp)();
         const newUser = await db_1.db.user.create({
@@ -64,10 +65,10 @@ class UserServicesImpl {
         const findUser = await db_1.db.user.findFirst({
             where: { id },
             omit: { password: true, otp: true, otpExpiry: true, createdAt: true, updatedAt: true },
-            include: { orderHistory: true }
+            include: { orderHistory: { include: { orderItem: true } } }
         });
         if (!findUser) {
-            throw new Error(`User with id: ${id} not found`);
+            throw new CustomError_1.CustomError(404, `User with id: ${id} not found`);
         }
         else {
             return findUser;
@@ -78,7 +79,7 @@ class UserServicesImpl {
             where: { id }
         });
         if (!findUser) {
-            throw new Error(`User with id: ${id} not found`);
+            throw new CustomError_1.CustomError(404, `User with id: ${id} not found`);
         }
         else {
             const updatedUser = await db_1.db.user.update({
@@ -93,18 +94,18 @@ class UserServicesImpl {
             where: { id }
         });
     }
-    async createOrder(data) {
-        const newOrder = await db_1.db.deliveryOrder.create({
-            data: {
-                evtolId: data.evtolId,
-                userId: data.userId,
-                reference: data.reference,
-                destination: data.destination,
-            },
-            include: { orderItem: { include: { order: true } } }
-        });
-        return newOrder;
-    }
+    // async createOrder(data: CreateOrderDTO): Promise<DeliveryOrder> {
+    //     const newOrder = await db.deliveryOrder.create({
+    //         data: {
+    //             evtolId: data.evtolId,
+    //             userId: data.userId,
+    //             reference: data.reference,
+    //             destination: data.destination,
+    //         },
+    //         include: {orderItem: {include: {order: true}}}
+    //     });
+    //     return newOrder;
+    // }
     async getAllMeds() {
         const allMeds = await db_1.db.medicalSupply.findMany({});
         return allMeds;

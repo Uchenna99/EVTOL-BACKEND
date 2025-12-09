@@ -10,6 +10,6 @@ const userRouter = express_1.default.Router();
 userRouter.post('/create-user', userController.createUser);
 userRouter.get('/get-user/:id', userController.getUser);
 userRouter.get('/fetch-meds', userController.getMeds);
-userRouter.post('/create-order', userController.createOrder);
+// userRouter.post('/create-order', userController.createOrder);
 userRouter.get('/get-orders', userController.getUserOrders);
 exports.default = userRouter;

@@ -30,6 +30,14 @@ export class PaymentServicesImpl implements PaymentServices {
                 reference,
                 userId: data.userId,
                 destination: data.destination,
+                orderItem: {
+                    create: data.items.map(item => ({
+                        supplyId: item.id,
+                        name: item.name,
+                        weight: item.weight,
+                        price: item.price
+                    }))
+                }
             }
         })
 

@@ -21,6 +21,7 @@ class UserController {
                 res.status(200).json(user);
             }
             catch (error) {
+                next(error);
             }
         };
         this.getMeds = async (req, res, next) => {
@@ -32,16 +33,15 @@ class UserController {
                 next(error);
             }
         };
-        this.createOrder = async (req, res, next) => {
-            try {
-                const data = req.body;
-                const newOrder = await this.userServices.createOrder(data);
-                res.status(201).json(newOrder);
-            }
-            catch (error) {
-                next(error);
-            }
-        };
+        // public createOrder = async (req: Request, res: Response, next: NextFunction)=>{
+        //     try {
+        //         const data = req.body as CreateOrderDTO;
+        //         const newOrder = await this.userServices.createOrder(data);
+        //         res.status(201).json(newOrder);
+        //     } catch (error) {
+        //         next(error);
+        //     }
+        // }
         this.getUserOrders = async (req, res, next) => {
             try {
                 const id = req.params.id;

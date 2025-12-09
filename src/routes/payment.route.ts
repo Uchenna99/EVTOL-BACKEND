@@ -7,7 +7,7 @@ const paymentController = new PaymentController();
 
 paymentRouter.post("/initialize", paymentController.initializePayment);
 
-paymentRouter.post("/verify/:reference", paymentController.verifyPayment);
+paymentRouter.get("/verify/:reference", paymentController.verifyPayment);
 
 paymentRouter.post("/webhook", webhook);
 

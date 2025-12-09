@@ -78,7 +78,7 @@ export class UserServicesImpl implements UserServices{
         const findUser = await db.user.findFirst({
             where: {id},
             omit: {password:true, otp: true, otpExpiry: true, createdAt: true, updatedAt: true},
-            include: {orderHistory: true}
+            include: {orderHistory: {include: {orderItem: true}}}
         });
         if(!findUser){
             throw new CustomError(404, `User with id: ${id} not found`);

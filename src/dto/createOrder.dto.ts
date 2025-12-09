@@ -1,4 +1,5 @@
-import { IsEmail, IsNotEmpty, IsNumber, IsString } from "class-validator";
+import { IsArray, IsEmail, IsNotEmpty, IsNumber, IsString } from "class-validator";
+import { CreateOrderItemsDTO } from "./CreateOrderItems.dto";
 
 
 export class CreateOrderDTO {
@@ -17,5 +18,9 @@ export class CreateOrderDTO {
     @IsNotEmpty()
     @IsString()
     destination!: string;
+
+    @IsNotEmpty()
+    @IsArray()
+    items!: CreateOrderItemsDTO[];
 
 }
