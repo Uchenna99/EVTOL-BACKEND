@@ -9,7 +9,7 @@ export interface UserServices {
     getUserById(id: string): Promise<Partial<User>>;
     updateUser(id: string, data: Partial<CreatUserDTO>): Promise<User>;
     deleteUser(id: string): Promise<void>;
-    createOrder(data: CreateOrderDTO): Promise<DeliveryOrder>;
+    // createOrder(data: CreateOrderDTO): Promise<DeliveryOrder>;
     getUserOrders(id: string): Promise<DeliveryOrder[]>;
     getAllMeds(): Promise<MedicalSupply[]>;
 }

@@ -2,7 +2,7 @@
     {
         "id": 2,
         "name": "Vitamin C",
-        "description":"Item description",
+        "description":"Boosts immunity and energy.",
         "weight": 90,
         "image": "https://res.cloudinary.com/df6xz7bqp/image/upload/v1742811109/vitaminC_hvs9de.png",
         "price": 2000,
@@ -11,7 +11,7 @@
     {
         "id": 6,
         "name": "Amatem Softgel",
-        "description":"Item description",
+        "description":"Fast relief for malaria symptoms.",
         "weight": 50,
         "image": "https://res.cloudinary.com/df6xz7bqp/image/upload/v1742814626/Amatem_Fort_Artemether_pku5cz.webp",
         "price": 3000,
@@ -20,7 +20,7 @@
     {
         "id": 7,
         "name": "Syringes",
-        "description":"Item description",
+        "description":"Sterile syringes for injections.",
         "weight": 25,
         "image": "https://res.cloudinary.com/df6xz7bqp/image/upload/v1742928426/61y9ii_QfmL._AC_SL1170__rkdujb.jpg",
         "price": 4000,
@@ -29,7 +29,7 @@
     {
         "id": 8,
         "name": "Epinephrine",
-        "description":"Item description",
+        "description":"Emergency treatment for severe allergies.",
         "weight": 25,
         "image": "https://res.cloudinary.com/df6xz7bqp/image/upload/v1742929223/epinephrine_epuubf.jpg",
         "price": 5200,
@@ -38,7 +38,7 @@
     {
         "id": 1,
         "name": "Ibuprofen",
-        "description":"Item description",
+        "description":"Relieves pain, fever, and inflammation.",
         "weight": 60,
         "image": "https://res.cloudinary.com/df6xz7bqp/image/upload/v1742811109/ibuprofen_kpttux.png",
         "price": 1400,
@@ -47,7 +47,7 @@
     {
         "id": 3,
         "name": "Astymin Syrup",
-        "description":"Item description",
+        "description":"Supports strength and appetite.",
         "weight": 250,
         "image": "https://res.cloudinary.com/df6xz7bqp/image/upload/v1742811110/astymin_ledhyn.png",
         "price": 4500,
@@ -56,7 +56,7 @@
     {
         "id": 4,
         "name": "Combantrin",
-        "description":"Item description",
+        "description":"Effective deworming medication.",
         "weight": 50,
         "image": "https://res.cloudinary.com/df6xz7bqp/image/upload/v1742811110/combantrin_fm9ef7.png",
         "price": 2400,
@@ -65,7 +65,7 @@
     {
         "id": 5,
         "name": "Paracetamol",
-        "description":"Item description",
+        "description":"Reduces pain and fever.",
         "weight": 90,
         "image": "https://res.cloudinary.com/df6xz7bqp/image/upload/w_1000,ar_1:1,c_fill,g_auto,e_art:hokusai/v1742811111/paracetamol_vv5cee.png",
         "price": 1200,
@@ -74,7 +74,7 @@
     {
         "id": 9,
         "name": "BCG Vaccine",
-        "description":"Item description",
+        "description":"Vaccine for tuberculosis prevention.",
         "weight": 90,
         "image": "https://res.cloudinary.com/df6xz7bqp/image/upload/v1764795714/pq_118_BCG_20dose_SII_container_image-Hadapsar_e7fnsp.jpg",
         "price": 10000,
@@ -83,7 +83,7 @@
     {
         "id": 10,
         "name": "Covid-19 Vaccine",
-        "description":"Item description",
+        "description":"Protects against COVID-19 infection.",
         "weight": 90,
         "image": "https://res.cloudinary.com/df6xz7bqp/image/upload/v1764796003/close-up-of-COVID-19-vaccine-vial-being-held-by-a-person-wearing-a-blue-PPE-glove-shutterstock_1678629760_Fotor-16x9-1-min_zherk7.jpg",
         "price": 14000,
@@ -92,7 +92,7 @@
     {
         "id": 11,
         "name": "HIV Test Kit",
-        "description":"Item description",
+        "description":"Quick self-test for HIV detection.",
         "weight": 100,
         "image": "https://res.cloudinary.com/df6xz7bqp/image/upload/v1764795714/OraQuick-HIV-Self-Test-Kit-1-Test_nyewiq.jpg",
         "price": 8400,
@@ -100,10 +100,10 @@
     },
     {
         "id": 12,
-        "name": "Blood Unit",
-        "description":"Item description",
+        "name": "Blood Unit (O+)",
+        "description":"Screened blood for emergency transfusion.",
         "weight": 400,
-        "image": "https://res.cloudinary.com/df6xz7bqp/image/upload/v1764795714/OraQuick-HIV-Self-Test-Kit-1-Test_nyewiq.jpg",
+        "image": "https://res.cloudinary.com/df6xz7bqp/image/upload/v1764795714/T3106_blood-transfer-bags-blood-man_500x500_veqs5q.png",
         "price": 37000,
         "category": "Emergency"
     }

@@ -111,18 +111,18 @@ export class UserServicesImpl implements UserServices{
     }
     
     
-    async createOrder(data: CreateOrderDTO): Promise<DeliveryOrder> {
-        const newOrder = await db.deliveryOrder.create({
-            data: {
-                evtolId: data.evtolId,
-                userId: data.userId,
-                reference: data.reference,
-                destination: data.destination,
-            },
-            include: {orderItem: {include: {order: true}}}
-        });
-        return newOrder;
-    }
+    // async createOrder(data: CreateOrderDTO): Promise<DeliveryOrder> {
+    //     const newOrder = await db.deliveryOrder.create({
+    //         data: {
+    //             evtolId: data.evtolId,
+    //             userId: data.userId,
+    //             reference: data.reference,
+    //             destination: data.destination,
+    //         },
+    //         include: {orderItem: {include: {order: true}}}
+    //     });
+    //     return newOrder;
+    // }
     
     
     async getAllMeds(): Promise<MedicalSupply[]> {
