@@ -21,6 +21,6 @@ export class CreateOrderDTO {
 
     @IsNotEmpty()
     @IsArray()
-    items!: CreateOrderItemsDTO[];
+    orderItem!: CreateOrderItemsDTO[];
 
 }
