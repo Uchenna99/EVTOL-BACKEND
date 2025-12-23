@@ -29,10 +29,21 @@ export const webhook = async (req: Request, res: Response) => {
           where: { reference },
           data: {
             paymentStatus: 'SUCCESSFUL',
+            deliveryStatus: 'IN_TRANSIT'
           },
         });
-
         console.log('✅ Order updated:', updatedOrder);
+
+        setTimeout(async() => {
+          await db.deliveryOrder.update({
+          where: { reference },
+          data: {
+            deliveryStatus: 'DELIVERED'
+          },
+        });
+        }, 720000);
+        console.log('✅ Order updated:', updatedOrder);
+
       } catch (err) {
         console.error('Error updating order:', err);
       }

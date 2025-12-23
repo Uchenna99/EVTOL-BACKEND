@@ -101,7 +101,7 @@ export class PaymentServicesImpl implements PaymentServices {
         })
 
         return { status, data: response.data.data };
-        }
+    }
 
     
 }
